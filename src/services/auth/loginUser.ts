@@ -9,7 +9,12 @@ import { parse } from "cookie";
 import { setCookies } from "./tokenHandler";
 import { JwtPayload } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
-import { UserRole } from "@/utility/auth-utils";
+import {
+  getDefaultDashboardRoutes,
+  isValidRedirectForRole,
+  UserRole,
+} from "@/utility/auth-utils";
+import { redirect } from "next/navigation";
 
 export const loginUser = async (_currentState: any, formData: any) => {
   try {
@@ -98,15 +103,17 @@ export const loginUser = async (_currentState: any, formData: any) => {
     if (!data?.success) {
       throw new Error(data.message || "Login failed");
     }
-    // Validation passed
-    // return {
-    //   success: true,
-    //   message: "Validation success",
-    //   data: {
-    //     email: validatedPayload?.data?.email,
-    //     password: validatedPayload?.data?.password,
-    //   },
-    // } as IInputErrorState;
+
+    if (redirectTo) {
+      const requestedPath = redirectTo.toString();
+      if (isValidRedirectForRole(requestedPath, userRole)) {
+        redirect(`${requestedPath}?loggedIn=true`);
+      } else {
+        redirect(`${getDefaultDashboardRoutes(userRole)}?loggedIn=true`);
+      }
+    } else {
+      redirect(`${getDefaultDashboardRoutes(userRole)}?loggedIn=true`);
+    }
   } catch (error: any) {
     if (error?.digest?.startsWith("NEXT_REDIRECT")) {
       throw error;
