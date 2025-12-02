@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { deleteCookies, getCookies } from "./services/auth/tokenHandler";
 import {
@@ -16,18 +17,20 @@ export async function proxy(request: NextRequest) {
   let userRole: UserRole | null = null;
 
   if (accessToken) {
-    const verifyToken: JwtPayload | string = jwt.verify(
-      accessToken,
-      process.env.ACCESS_TOKEN_SECRET as string
-    );
+    try {
+      const verifyToken = jwt.verify(
+        accessToken,
+        process.env.ACCESS_TOKEN_SECRET as string
+      ) as JwtPayload;
 
-    if (typeof verifyToken === "string") {
+      userRole = verifyToken.role as UserRole;
+    } catch (error: any) {
       await deleteCookies("accessToken");
       await deleteCookies("refreshToken");
       return NextResponse.redirect(new URL("/login", request.url));
     }
-    userRole = verifyToken.role as UserRole;
   }
+
   const routeOwner = getRouteOwner(pathname);
   const isAuth = isAuthRoutes(pathname);
 
@@ -43,21 +46,24 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  //Rule : 3
   if (!accessToken) {
+    if (isAuth) {
+      return NextResponse.next();
+    }
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  //Rule : 3
+  //Rule : 4
   if (routeOwner === "COMMON") {
     return NextResponse.next();
   }
 
-  // Rule : 4
-
+  // Rule : 5
   if (routeOwner === "ADMIN" || routeOwner === "TRAVELER") {
-    if (routeOwner === userRole) {
+    if (routeOwner !== userRole) {
       return NextResponse.redirect(
         new URL(getDefaultDashboardRoutes(userRole as UserRole), request.url)
       );

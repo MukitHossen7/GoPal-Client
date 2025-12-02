@@ -183,21 +183,18 @@ import { usePathname } from "next/navigation";
 import { Menu, X, User, LogOut, Map, Calendar, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
+import { IUserInfo } from "@/types/user.interface";
 
-const PublicNavbar = () => {
+const PublicNavbar = ({
+  accessToken,
+  authData,
+}: {
+  accessToken: string;
+  authData: IUserInfo;
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
-
-  // TODO: Replace with real Auth Context
-  // Mock Data for demonstration
-  const user = {
-    name: "Rahim Uddin",
-    email: "rahim@example.com",
-    image:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=100&auto=format&fit=crop",
-    role: "TRAVELER", // Change to "ADMIN" to test admin view, or null for logged out
-  };
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -235,10 +232,10 @@ const PublicNavbar = () => {
 
           {/* 3. Right Side (Auth & Actions) */}
           <div className="hidden md:flex items-center space-x-4">
-            {user ? (
+            {accessToken && authData.data?.email ? (
               <>
                 {/* Create Plan Button (For Users) */}
-                {user.role === "TRAVELER" && (
+                {authData?.data?.user?.role === "TRAVELER" && (
                   <Link href="/travel-plans/add">
                     <Button
                       variant="outline"
@@ -257,7 +254,10 @@ const PublicNavbar = () => {
                   >
                     <div className="relative h-9 w-9 overflow-hidden rounded-full border border-primary/20 ring-2 ring-transparent hover:ring-primary/20 transition-all">
                       <Image
-                        src={user.image || "/placeholder-avatar.png"}
+                        src={
+                          authData?.data?.profileImage ||
+                          "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=100&auto=format&fit=crop"
+                        }
                         alt="User"
                         fill
                         className="object-cover"
@@ -270,16 +270,16 @@ const PublicNavbar = () => {
                     <div className="absolute right-0 mt-3 w-56 rounded-xl border bg-card text-card-foreground shadow-lg animate-in fade-in zoom-in-95">
                       <div className="flex flex-col space-y-1 p-3 border-b">
                         <p className="text-sm font-medium leading-none">
-                          {user.name}
+                          {authData?.data?.name}
                         </p>
                         <p className="text-xs text-muted-foreground truncate">
-                          {user.email}
+                          {authData?.data?.email}
                         </p>
                       </div>
                       <div className="p-2">
-                        {user.role === "ADMIN" ? (
+                        {authData?.data?.user?.role === "ADMIN" ? (
                           <Link
-                            href="/dashboard"
+                            href="/admin/dashboard"
                             className="flex items-center gap-2 rounded-md p-2 text-sm hover:bg-accent transition-colors"
                           >
                             <Settings className="h-4 w-4" /> Admin Dashboard
@@ -358,20 +358,37 @@ const PublicNavbar = () => {
             ))}
 
             <div className="border-t pt-3 px-4 space-y-2">
-              {user ? (
+              {accessToken && authData?.data?.email ? (
                 <>
-                  <Link
-                    href="/dashboard"
-                    className="block text-sm font-medium hover:text-primary"
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="/profile/me"
-                    className="block text-sm font-medium hover:text-primary"
-                  >
-                    Profile
-                  </Link>
+                  {authData?.data?.user?.role === "ADMIN" ? (
+                    <Link
+                      href="/admin/dashboard"
+                      className="flex items-center gap-2 rounded-md p-2 text-sm hover:bg-accent transition-colors"
+                    >
+                      <Settings className="h-4 w-4" /> Admin Dashboard
+                    </Link>
+                  ) : (
+                    <>
+                      <Link
+                        href="/dashboard"
+                        className="flex items-center gap-2 rounded-md p-2 text-sm hover:bg-accent transition-colors"
+                      >
+                        <Map className="h-4 w-4" /> My Dashboard
+                      </Link>
+                      <Link
+                        href={`/profile/me`}
+                        className="flex items-center  gap-2 rounded-md p-2 text-sm  hover:bg-accent transition-colors"
+                      >
+                        <User className="h-4 w-4" /> My Profile
+                      </Link>
+                      <Link
+                        href="/travel-plans"
+                        className="flex items-center gap-2 rounded-md p-2 text-sm hover:bg-accent transition-colors"
+                      >
+                        <Calendar className="h-4 w-4" /> My Plans
+                      </Link>
+                    </>
+                  )}
                   <button className="block w-full text-left text-sm font-medium text-destructive">
                     Logout
                   </button>
