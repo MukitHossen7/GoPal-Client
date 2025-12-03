@@ -1,20 +1,15 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { IAuthUser } from "@/types/user.interface";
+import { getUserInfo } from "@/services/auth/getUserInfo";
 
 const CommonDashboardLayout = async ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  //   const authData = (await getUserInfo()) as IAuthUser;
-  // // console.log(authData);
-  const authData: IAuthUser = {
-    id: "u001",
-    email: "admin1@example.com",
-    role: "ADMIN",
-  };
+  const authData = await getUserInfo();
+  console.log(authData);
 
   return (
     <SidebarProvider

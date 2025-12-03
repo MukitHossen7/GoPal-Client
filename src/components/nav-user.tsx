@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  IconDotsVertical,
-  IconLogout,
-  IconUserCircle,
-} from "@tabler/icons-react";
+import { ChevronsUpDown, LogOut, User, LockKeyhole } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -23,8 +19,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { LockKeyholeOpen } from "lucide-react";
 import { UserRole } from "@/utility/auth-utils";
+import { logoutUser } from "@/services/auth/logoutUser";
 
 export function NavUser({
   user,
@@ -37,9 +33,11 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  // const handleLogout = async () => {
-  //   await logoutUser();
-  // };
+
+  const handleLogout = async () => {
+    await logoutUser();
+  };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -47,19 +45,25 @@ export function NavUser({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-sidebar-accent"
             >
-              <Avatar className="h-8 w-8 rounded-full grayscale">
-                <AvatarImage src={user?.avatar} alt={user?.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              <Avatar className="h-8 w-8 rounded-lg">
+                <AvatarImage
+                  src={user?.avatar}
+                  alt={user?.name}
+                  className="object-cover"
+                />
+                <AvatarFallback className="rounded-lg bg-primary/10 text-primary font-bold">
+                  {user?.name?.slice(0, 2).toUpperCase()}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium text-base">
-                  {user?.name}
+                <span className="truncate font-semibold">{user?.name}</span>
+                <span className="truncate text-xs text-muted-foreground">
+                  {user?.email}
                 </span>
-                <span className="truncate text-xs">{user?.role}</span>
               </div>
-              <IconDotsVertical className="ml-auto size-4" />
+              <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -70,32 +74,27 @@ export function NavUser({
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-9 w-9 rounded-full object-cover">
+                <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user?.avatar} alt={user?.name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium text-base">
-                    {user?.name}
-                  </span>
-                  <span className="truncate text-sm">{user?.email}</span>
+                  <span className="truncate font-semibold">{user?.name}</span>
+                  <span className="truncate text-xs">{user?.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <Link className="font-medium text-gray-700" href="/my-profile">
-                <DropdownMenuItem>
-                  <IconUserCircle />
+              <Link href="/my-profile">
+                <DropdownMenuItem className="cursor-pointer">
+                  <User className="mr-2 size-4" />
                   Account
                 </DropdownMenuItem>
               </Link>
-              <Link
-                className="font-medium text-gray-700"
-                href="/change-password"
-              >
-                <DropdownMenuItem>
-                  <LockKeyholeOpen />
+              <Link href="/change-password">
+                <DropdownMenuItem className="cursor-pointer">
+                  <LockKeyhole className="mr-2 size-4" />
                   Change Password
                 </DropdownMenuItem>
               </Link>
@@ -103,10 +102,10 @@ export function NavUser({
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
-              className="font-medium text-gray-700"
-              // onClick={handleLogout}
+              onClick={handleLogout}
+              className="flex w-full cursor-pointer items-center gap-2 rounded-md p-2 text-sm text-destructive focus:bg-destructive/10 focus:text-destructive"
             >
-              <IconLogout />
+              <LogOut className="mr-2 size-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

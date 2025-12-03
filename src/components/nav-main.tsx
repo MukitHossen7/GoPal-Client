@@ -1,6 +1,5 @@
 "use client";
 
-import { type Icon } from "@tabler/icons-react";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -8,9 +7,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { LucideProps } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export function NavMain({
   items,
@@ -18,10 +18,11 @@ export function NavMain({
   items: {
     title: string;
     url: string;
-    icon?: Icon | React.ComponentType<LucideProps>;
+    icon?: LucideIcon;
   }[];
 }) {
   const pathname = usePathname();
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -30,26 +31,30 @@ export function NavMain({
             const isActive = pathname === item.url;
             return (
               <SidebarMenuItem key={item.title}>
-                <Link href={item.url}>
-                  <SidebarMenuButton
-                    tooltip={item.title}
-                    className={`flex items-center gap-2 rounded-lg px-3 py-2 transition-all duration-200 
-                      ${
-                        isActive
-                          ? "bg-primary text-white shadow-md hover:bg-primary hover:text-white"
-                          : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-                      }`}
-                  >
+                <SidebarMenuButton
+                  asChild
+                  tooltip={item.title}
+                  className={cn(
+                    "transition-all duration-200 ease-in-out py-5",
+                    isActive
+                      ? "bg-primary text-primary-foreground shadow-md hover:bg-primary hover:text-primary-foreground"
+                      : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  )}
+                >
+                  <Link href={item.url} className="flex items-center gap-3">
                     {item.icon && (
                       <item.icon
-                        className={`size-5 transition-all ${
-                          isActive ? "text-white" : "text-gray-500"
-                        }`}
+                        className={cn(
+                          "size-5",
+                          isActive
+                            ? "text-primary-foreground"
+                            : "text-muted-foreground group-hover:text-sidebar-accent-foreground"
+                        )}
                       />
                     )}
-                    <span className="text-sm font-medium">{item.title}</span>
-                  </SidebarMenuButton>
-                </Link>
+                    <span className="font-medium">{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
               </SidebarMenuItem>
             );
           })}

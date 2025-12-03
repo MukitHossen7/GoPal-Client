@@ -1,10 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { IconInnerShadowTop, IconSettings } from "@tabler/icons-react";
-
 import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
@@ -15,149 +12,76 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { IAuthUser } from "@/types/user.interface";
-import { LayoutDashboard } from "lucide-react";
+import { IUserInfo } from "@/types/user.interface";
+import { LayoutDashboard, Map, Plane, Users, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import { Logo } from "./shared/Logo";
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  authData: IAuthUser;
+  authData: IUserInfo;
 }
 
 export function AppSidebar({ authData, ...props }: AppSidebarProps) {
   const navMainItems = [];
+  const userRole = authData?.data?.user?.role;
 
-  // / Derive the final items array without mutation
-  // const navItems = useMemo(() => {
-  //   if (user?.role === "ADMIN") {
-  //     return [
-  //       ...items,
-  //       {
-  //         title: "Manage Doctors",
-  //         url: "/admin/dashboard/manage-doctors",
-  //         icon: IconSettings,
-  //       },
-  //       {
-  //         title: "Manage Patients",
-  //         url: "/admin/dashboard/manage-patients",
-  //         icon: IconUsers,
-  //       },
-  //     ];
-  //   }
-  //   return items;
-  // }, [items, user?.role]);
-
-  if (authData?.role === "ADMIN") {
+  // Admin Menu Based on Requirements
+  if (userRole === "ADMIN") {
     navMainItems.push(
       {
         title: "Dashboard",
         url: "/admin/dashboard",
         icon: LayoutDashboard,
+      },
+      {
+        title: "Manage Users",
+        url: "/admin/users",
+        icon: Users,
+      },
+      {
+        title: "Manage Trips",
+        url: "/admin/trips",
+        icon: Plane,
+      },
+      {
+        title: "Activity Logs",
+        url: "/admin/activity",
+        icon: ShieldCheck,
       }
-      // {
-      //   title: "Admins",
-      //   url: "/admin/dashboard/manage-admin",
-      //   icon: Shield,
-      // },
-      // {
-      //   title: "Doctors",
-      //   url: "/admin/dashboard/manage-doctors",
-      //   icon: Stethoscope,
-      // },
-      // {
-      //   title: "Patients",
-      //   url: "/admin/dashboard/manage-patients",
-      //   icon: Users,
-      // },
-      // {
-      //   title: "Appointments",
-      //   url: "/admin/dashboard/manage-appointments",
-      //   icon: Calendar,
-      // },
-      // {
-      //   title: "Schedules",
-      //   url: "/admin/dashboard/manage-schedules",
-      //   icon: Clock,
-      // },
-      // {
-      //   title: "Specialties",
-      //   url: "/admin/dashboard/manage-specialities",
-      //   icon: Hospital,
-      // }
     );
   }
 
-  // if (authData?.role === "DOCTOR") {
-  //   navMainItems.push(
-  //     {
-  //       title: "Dashboard",
-  //       url: "/doctor/dashboard",
-  //       icon: LayoutDashboard,
-  //     },
-  //     {
-  //       title: "Appointments",
-  //       url: "/doctor/dashboard/appointments",
-  //       icon: Calendar,
-  //     },
-  //     {
-  //       title: "My Schedules",
-  //       url: "/doctor/dashboard/my-schedules",
-  //       icon: Clock,
-  //     },
-  //     {
-  //       title: "Prescriptions",
-  //       url: "/doctor/dashboard/prescriptions",
-  //       icon: FileText,
-  //     }
-  //   );
-  // }
-
-  // if (authData?.role === "PATIENT") {
-  //   navMainItems.push(
-  //     {
-  //       title: "Dashboard",
-  //       url: "/dashboard",
-  //       icon: LayoutDashboard,
-  //     },
-  //     {
-  //       title: "My Appointments",
-  //       url: "/dashboard/my-appointments",
-  //       icon: Calendar,
-  //     },
-  //     // {
-  //     //   title: "Book Appointment",
-  //     //   url: "/dashboard/my-prescriptions",
-  //     //   icon: ClipboardList,
-  //     // },
-  //     {
-  //       title: "My Prescriptions",
-  //       url: "/dashboard/my-prescriptions",
-  //       icon: FileText,
-  //     },
-  //     {
-  //       title: "Health Records",
-  //       url: "/dashboard/health-records",
-  //       icon: Activity,
-  //     }
-  //   );
-  // }
+  // Traveler Menu Based on Requirements
+  if (userRole === "TRAVELER") {
+    navMainItems.push(
+      {
+        title: "Dashboard",
+        url: "/dashboard",
+        icon: LayoutDashboard,
+      },
+      {
+        title: "Explore Travelers",
+        url: "/explore",
+        icon: Map,
+      },
+      {
+        title: "My Travel Plans",
+        url: "/travel-plans",
+        icon: Plane,
+      }
+    );
+  }
 
   const data = {
     user: {
-      name: "Example",
-      email: authData?.email || "m@example.com",
-      avatar: "https://i.ibb.co/nMxbRbGP/download.png",
-      role: authData?.role,
+      name: authData?.data?.name || "Traveler",
+      email: authData?.data?.email || "user@example.com",
+      avatar: authData?.data?.profileImage || "",
+      role: userRole,
     },
     navMain: navMainItems,
-
-    navSecondary: [
-      {
-        title: "Settings",
-        url: "#",
-        icon: IconSettings,
-      },
-    ],
   };
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -165,11 +89,10 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className="data-[slot=sidebar-menu-button]:!p-1.5 hover:bg-transparent"
             >
               <Link href="/">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Health Care.</span>
+                <Logo variant="full" />
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -177,7 +100,6 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
