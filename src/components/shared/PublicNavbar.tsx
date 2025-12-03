@@ -25,7 +25,7 @@ const PublicNavbar = ({
   };
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Explore Travelers", path: "/explore" },
+    { name: "Explore Travelers", path: "/explore-travelers" },
     { name: "Travel Plans", path: "/travel-plans" },
   ];
 
