@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use server";
+
 import { serverFetch } from "@/utility/serverFetchHelper";
 import { getCookies } from "./tokenHandler";
 import jwt, { JwtPayload } from "jsonwebtoken";
