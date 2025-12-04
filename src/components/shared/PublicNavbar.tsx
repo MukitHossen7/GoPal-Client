@@ -124,7 +124,7 @@ const PublicNavbar = ({
                               <Map className="h-4 w-4" /> My Dashboard
                             </Link>
                             <Link
-                              href={`/profile/me`}
+                              href={`/my-profile`}
                               className="flex items-center  gap-2 rounded-md p-2 text-sm  hover:bg-accent transition-colors"
                             >
                               <User className="h-4 w-4" /> My Profile

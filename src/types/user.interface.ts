@@ -31,4 +31,5 @@ export interface IUserBasic {
   needPasswordChange: boolean;
   role: "TRAVELER" | "ADMIN";
   status: "ACTIVE" | "INACTIVE" | "BLOCKED";
+  gender: "MALE" | "FEMALE" | "OTHER";
 }
