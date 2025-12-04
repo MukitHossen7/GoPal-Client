@@ -130,7 +130,7 @@ const PublicNavbar = ({
                               <User className="h-4 w-4" /> My Profile
                             </Link>
                             <Link
-                              href="/travel-plans"
+                              href="/my-plans"
                               className="flex items-center gap-2 rounded-md p-2 text-sm hover:bg-accent transition-colors"
                             >
                               <Calendar className="h-4 w-4" /> My Plans

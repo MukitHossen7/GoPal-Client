@@ -17,3 +17,10 @@ export interface ITravelPlan {
   visibility: boolean;
   traveler: Traveler;
 }
+
+export interface IMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}

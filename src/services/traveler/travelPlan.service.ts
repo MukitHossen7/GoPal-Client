@@ -26,6 +26,29 @@ export async function getTravelPlans(queryString?: string) {
   }
 }
 
+export async function getMyTravelPlans(queryString?: string) {
+  try {
+    const response = await serverFetch.get(
+      `/travel-plans/my-plans${
+        queryString ? `?${queryString}` : "?sortBy=createdAt&sortOrder=desc"
+      }`,
+      {
+        cache: "no-store",
+      }
+    );
+    const result = await response.json();
+    return result;
+  } catch (error: any) {
+    console.error("Error fetching travel plans:", error);
+    return {
+      success: false,
+      message: "Failed to fetch travel plans",
+      data: [],
+      meta: { page: 1, limit: 10, total: 0, totalPages: 0 },
+    };
+  }
+}
+
 export async function getTravelPlanById(id: string) {
   if (!id) {
     return {
