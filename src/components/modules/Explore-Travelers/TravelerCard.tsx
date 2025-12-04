@@ -6,16 +6,18 @@ import { CheckCircle2, MapPin, Globe, Star, ArrowUpRight } from "lucide-react";
 
 const TravelerCard = ({ traveler }: { traveler: ITraveler }) => {
   return (
-    <Card className="group relative flex flex-col justify-between overflow-hidden border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-md">
-      {/* Top Decorator Line (Optional accent) */}
+    // Change 1: Added 'h-full' to make the card fill the grid cell height
+    <Card className="group h-full relative flex flex-col justify-between overflow-hidden border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-md">
+      {/* Top Decorator Line */}
       <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-primary/40 via-primary to-primary/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-      {/* Hover Arrow Icon (Button replacement) */}
+      {/* Hover Arrow Icon */}
       <div className="absolute right-4 top-4 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100">
         <ArrowUpRight className="text-muted-foreground" size={20} />
       </div>
 
-      <CardContent className="p-6">
+      {/* Change 2: Added 'flex-1' to push the footer to the bottom */}
+      <CardContent className="p-6 flex-1 flex flex-col">
         {/* Header: Avatar & Name */}
         <div className="flex items-start gap-4">
           <div className="relative">
@@ -29,7 +31,7 @@ const TravelerCard = ({ traveler }: { traveler: ITraveler }) => {
                 {traveler.name.slice(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            {/* Verified Badge positioned nicely */}
+            {/* Verified Badge */}
             {traveler.isVerifiedTraveler && (
               <div
                 className="absolute -bottom-1 -right-1 rounded-full bg-background p-[2px] shadow-sm"
@@ -59,7 +61,8 @@ const TravelerCard = ({ traveler }: { traveler: ITraveler }) => {
         </div>
 
         {/* Bio Section */}
-        <div className="mt-4">
+        {/* Change 3: Added 'min-h-[40px]' to keep alignment even if text is short */}
+        <div className="mt-4 min-h-[40px]">
           <p className="line-clamp-2 text-sm text-muted-foreground leading-relaxed">
             {traveler.bio ||
               "This traveler prefers to keep an air of mystery..."}
@@ -79,7 +82,7 @@ const TravelerCard = ({ traveler }: { traveler: ITraveler }) => {
               </Badge>
             ))
           ) : (
-            <span className="text-xs text-muted-foreground italic">
+            <span className="text-xs text-muted-foreground italic py-1">
               No specific interests listed
             </span>
           )}
@@ -92,6 +95,7 @@ const TravelerCard = ({ traveler }: { traveler: ITraveler }) => {
       </CardContent>
 
       {/* Footer Stats - Separated Background */}
+      {/* 'mt-auto' ensures this stays at the bottom */}
       <div className="mt-auto border-t bg-muted/20 px-6 py-3">
         <div className="flex items-center justify-between text-sm">
           {/* Countries Count */}
