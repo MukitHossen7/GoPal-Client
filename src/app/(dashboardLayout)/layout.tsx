@@ -9,7 +9,6 @@ const CommonDashboardLayout = async ({
   children: React.ReactNode;
 }) => {
   const authData = await getUserInfo();
-  console.log(authData);
 
   return (
     <SidebarProvider
