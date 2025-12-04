@@ -6,8 +6,12 @@ import PopularDestinations from "@/components/modules/Home/PopularDestinations";
 import StatsSection from "@/components/modules/Home/StatsSection";
 import Testimonials from "@/components/modules/Home/Testimonials";
 import WhyChooseUs from "@/components/modules/Home/WhyChooseUs";
+import { getRecommendedTravelers } from "@/services/traveler/traveler.service";
+import { ITraveler } from "@/types/traveler.interface";
 
-const HomePage = () => {
+const HomePage = async () => {
+  const { data: matchesTravelers } = await getRecommendedTravelers();
+
   return (
     <main className="min-h-screen bg-background">
       {/* 1. Hero Section with Banner & Search */}
@@ -23,7 +27,7 @@ const HomePage = () => {
       <HowItWorks />
 
       {/* 5. Featured Travelers (Logged in users will see Matches here) */}
-      <FeaturedTravelers />
+      <FeaturedTravelers matchesTravelers={matchesTravelers as ITraveler[]} />
 
       {/* 6. Why Choose GoPal */}
       <WhyChooseUs />
