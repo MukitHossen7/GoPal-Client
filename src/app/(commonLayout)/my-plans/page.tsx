@@ -6,10 +6,11 @@ import { IMeta, ITravelPlan } from "@/types/travelPlan.interface";
 import { Plane, SearchX } from "lucide-react";
 
 interface Props {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default async function MyPlansPage({ searchParams }: Props) {
+export default async function MyPlansPage(props: Props) {
+  const searchParams = await props.searchParams;
   const params = new URLSearchParams();
   Object.keys(searchParams).forEach((key) => {
     const value = searchParams[key];
