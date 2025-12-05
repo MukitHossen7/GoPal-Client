@@ -13,6 +13,7 @@ export interface ITraveler {
   isVerifiedTraveler: boolean;
   subscriptionEndDate: string | null;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface IMeta {

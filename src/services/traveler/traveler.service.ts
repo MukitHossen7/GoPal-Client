@@ -43,3 +43,30 @@ export async function getRecommendedTravelers() {
     };
   }
 }
+
+export async function getTravelerById(id: string) {
+  try {
+    const response = await serverFetch.get(`/users/${id}`, {
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      return {
+        success: false,
+        message: "Failed to fetch from server",
+        data: undefined,
+      };
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error: any) {
+    console.error("Error fetching traveler by Id:", error);
+
+    return {
+      success: false,
+      message: error?.message || "Something went wrong",
+      data: undefined,
+    };
+  }
+}

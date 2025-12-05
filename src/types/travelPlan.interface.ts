@@ -1,4 +1,5 @@
 export interface Traveler {
+  id: string;
   name: string;
   email: string;
   averageRating: number;

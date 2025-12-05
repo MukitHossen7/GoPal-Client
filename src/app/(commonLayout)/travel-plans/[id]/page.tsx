@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { RequestButton } from "@/components/modules/TravelPlan/RequestButton";
 import { getTravelPlanById } from "@/services/traveler/travelPlan.service";
+import Link from "next/link";
 
 // Helper for duration calculation
 function getDays(start: string, end: string) {
@@ -175,9 +176,14 @@ export default async function TravelPlanDetailsPage({
                   ensure safe and fun trips for everyone!&quot; (This is a
                   placeholder bio based on the user data).
                 </p>
-                <Button variant="link" className="px-0 mt-2 text-primary">
-                  View Full Profile
-                </Button>
+                <Link href={`/explore-travelers/${plan?.traveler?.id}`}>
+                  <Button
+                    variant="link"
+                    className="px-0 mt-2 text-primary cursor-pointer"
+                  >
+                    View Full Profile
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
