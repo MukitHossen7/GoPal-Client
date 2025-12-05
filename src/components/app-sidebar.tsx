@@ -13,7 +13,14 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { IUserInfo } from "@/types/user.interface";
-import { LayoutDashboard, Map, Plane, Users, ShieldCheck } from "lucide-react";
+import {
+  LayoutDashboard,
+  Map,
+  Plane,
+  Users,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 import { Logo } from "./shared/Logo";
 
@@ -58,6 +65,11 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
         title: "Dashboard",
         url: "/dashboard",
         icon: LayoutDashboard,
+      },
+      {
+        title: "Trip Matches",
+        url: "/dashboard/trip-matches",
+        icon: Sparkles,
       },
       {
         title: "Explore Travelers",

@@ -258,3 +258,20 @@ export async function getTravelPlanById(id: string) {
     };
   }
 }
+
+export async function getMatchesTravelPlan() {
+  try {
+    const response = await serverFetch.get(`/travel-plans/matches`, {
+      cache: "no-store",
+    });
+    const result = await response.json();
+    return result;
+  } catch (error: any) {
+    console.error("Error fetching no match travel plans:", error);
+    return {
+      success: false,
+      message: "Failed to fetch no match travel plans",
+      data: [],
+    };
+  }
+}
