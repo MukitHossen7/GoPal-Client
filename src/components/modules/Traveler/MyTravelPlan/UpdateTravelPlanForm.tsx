@@ -48,14 +48,6 @@ export default function UpdateTravelPlanForm({
     <form action={formAction} className="space-y-6">
       {/* Hidden ID for Update */}
       <input type="hidden" name="id" value={defaultValues.id} />
-
-      {/* Global Error/Success Message */}
-      {!state.success && state.message && (
-        <div className="p-3 text-sm text-red-500 bg-red-50 rounded-md border border-red-200">
-          {state.message}
-        </div>
-      )}
-
       {/* --- Image Uploader --- */}
       <div className="flex flex-col items-center justify-center pb-4">
         <UploaderImage

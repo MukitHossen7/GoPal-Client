@@ -87,52 +87,62 @@ export async function createTravelPlan(
     };
   }
 }
+
 // --- UPDATE ACTION ---
 export async function updateTravelPlan(
   _prevState: IInputErrorState,
   formData: FormData
 ): Promise<IInputErrorState> {
-  const id = formData.get("id") as string;
-
-  const rawData = {
-    title: formData.get("title") as string,
-    destination: formData.get("destination") as string,
-    description: formData.get("description") as string,
-    budgetRange: formData.get("budgetRange") as string,
-    startDate: formData.get("startDate") as string,
-    endDate: formData.get("endDate") as string,
-    travelType: formData.get("travelType") as TravelType,
-    imageUrl: formData.get("imageUrl") as string,
-    visibility: formData.get("visibility") === "on",
-  };
-
-  // Validation
-  const errors: { field: string; message: string }[] = [];
-  if (!id) return { success: false, message: "ID missing for update" };
-  if (!rawData.title)
-    errors.push({ field: "title", message: "Title is required" });
-  if (!rawData.destination)
-    errors.push({ field: "destination", message: "Destination is required" });
-
-  if (errors.length > 0) {
-    return {
-      success: false,
-      message: "Validation failed",
-      errors: errors,
-      data: rawData,
-    };
-  }
-
   try {
-    console.log(`Updating Plan ID: ${id}`, rawData);
-    await wait(1000);
+    const id = formData.get("id") as string;
+    const imageFile = formData.get("imageUrl") as File;
+    const startDateString = formData.get("startDate") as string;
+    const endDateString = formData.get("endDate") as string;
 
+    const rawPayload = {
+      title: formData.get("title"),
+      destination: formData.get("destination"),
+      description: formData.get("description"),
+      budgetRange: formData.get("budgetRange"),
+      startDate: startDateString ? new Date(startDateString) : undefined,
+      endDate: endDateString ? new Date(endDateString) : undefined,
+      travelType: formData.get("travelType"),
+      visibility: formData.get("visibility") === "on",
+    };
+
+    const planData = {
+      ...rawPayload,
+      startDate: (rawPayload?.startDate as Date)?.toISOString(),
+      endDate: (rawPayload?.endDate as Date)?.toISOString(),
+    };
+
+    const backendFormData = new FormData();
+
+    backendFormData.append("data", JSON.stringify(planData));
+
+    if (imageFile && imageFile.size > 0) {
+      backendFormData.append("file", imageFile);
+    }
+
+    const res = await serverFetch.patch(`/travel-plans/${id}`, {
+      body: backendFormData,
+    });
+
+    const result = await res.json();
+
+    if (!result.success) {
+      throw new Error(result.message || "Failed to Update Travel Plan");
+    }
     revalidatePath("/my-travel-plans");
     return {
       success: true,
       message: "Travel plan updated successfully!",
     };
   } catch (error: any) {
+    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+    console.error("Create Plan Error:", error);
     return {
       success: false,
       message: error.message || "Something went wrong",
@@ -152,8 +162,14 @@ export async function deleteTravelPlanAction(
   }
 
   try {
-    console.log(`Deleting Plan ID: ${id}`);
-    await wait(1000);
+    const response = await serverFetch.delete(`/travel-plans/${id}`);
+    const result = await response.json();
+    if (!result.success) {
+      return {
+        success: false,
+        message: result.message || "Failed to delete travel plan.",
+      };
+    }
 
     revalidatePath("/my-travel-plans");
     return {
@@ -161,6 +177,7 @@ export async function deleteTravelPlanAction(
       message: "Travel plan deleted successfully!",
     };
   } catch (error: any) {
+    console.error("Delete schedule error:", error);
     return {
       success: false,
       message: error.message || "Delete failed",

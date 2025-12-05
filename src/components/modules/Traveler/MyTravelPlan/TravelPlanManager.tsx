@@ -67,25 +67,38 @@ export default function TravelPlanManager({
   useEffect(() => {
     if (!createState.message) return;
 
-    if (createState.success && createState) {
+    if (createState.success) {
       toast.success("Travel plan created successfully!");
       setTimeout(() => setIsCreateOpen(false), 0);
+      setTimeout(() => setSelectedPlan(null), 0);
     } else {
       toast.error(createState.message);
     }
   }, [createState]);
 
+  //Update
   useEffect(() => {
+    if (!updateState.message) return;
+
     if (updateState.success) {
-      setIsEditOpen(false);
-      setSelectedPlan(null);
+      toast.success("Travel plan update successfully!");
+      setTimeout(() => setIsEditOpen(false), 0);
+      setTimeout(() => setSelectedPlan(null), 0);
+    } else {
+      toast.error(updateState.message);
     }
   }, [updateState]);
 
+  //Delete
   useEffect(() => {
+    if (!deleteState.message) return;
+
     if (deleteState.success) {
-      setIsDeleteOpen(false);
-      setSelectedPlan(null);
+      toast.success("Travel plan delete successfully!");
+      setTimeout(() => setIsDeleteOpen(false), 0);
+      setTimeout(() => setSelectedPlan(null), 0);
+    } else {
+      toast.error(deleteState.message);
     }
   }, [deleteState]);
 
@@ -150,7 +163,7 @@ export default function TravelPlanManager({
           data={initialData}
           columns={columns}
           getRowKey={(row) => row.id}
-          onView={(row) => console.log("View", row)}
+          // onView={(row) => console.log("View", row)}
           onEdit={handleEdit}
           onDelete={handleDeleteClick}
         />
