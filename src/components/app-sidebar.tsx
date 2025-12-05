@@ -61,12 +61,12 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
       },
       {
         title: "Explore Travelers",
-        url: "/explore",
+        url: "/dashboard/explore-travelers",
         icon: Map,
       },
       {
         title: "My Travel Plans",
-        url: "/travel-plans",
+        url: "/dashboard/my-travel-plans",
         icon: Plane,
       }
     );

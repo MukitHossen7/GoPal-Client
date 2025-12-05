@@ -47,7 +47,10 @@ export default async function ProfilePage() {
             <div className="relative shrink-0">
               <div className="h-32 w-32 sm:h-36 sm:w-36 md:h-44 md:w-44 lg:h-48 lg:w-48 rounded-full border-[4px] sm:border-[6px] border-white shadow-xl overflow-hidden bg-white">
                 <Image
-                  src={profile?.profileImage || "https://github.com/shadcn.png"}
+                  src={
+                    profile?.profileImage ||
+                    "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop"
+                  }
                   alt={profile?.name}
                   fill
                   className="object-cover"

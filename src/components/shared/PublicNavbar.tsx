@@ -67,7 +67,7 @@ const PublicNavbar = ({
               <>
                 {/* Create Plan Button (For Users) */}
                 {authData?.data?.user?.role === "TRAVELER" && (
-                  <Link href="/travel-plans/add">
+                  <Link href="/dashboard/my-travel-plans">
                     <Button
                       variant="outline"
                       className="border-primary text-primary hover:bg-primary hover:text-white transition-all"

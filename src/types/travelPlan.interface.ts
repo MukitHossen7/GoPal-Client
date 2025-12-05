@@ -24,3 +24,11 @@ export interface IMeta {
   total: number;
   totalPages: number;
 }
+
+export enum TravelType {
+  SOLO = "SOLO",
+  FAMILY = "FAMILY",
+  FRIENDS = "FRIENDS",
+  COUPLE = "COUPLE",
+  GROUP = "GROUP",
+}
