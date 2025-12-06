@@ -249,7 +249,7 @@ export default async function TravelPlanDetailsPage({
                   </div>
 
                   {/* Action Button */}
-                  <RequestButton />
+                  <RequestButton id={plan.id} />
 
                   <p className="text-xs text-center text-muted-foreground mt-2">
                     You won&apos;t be charged yet. Host needs to approve.
