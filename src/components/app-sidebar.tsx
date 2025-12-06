@@ -20,6 +20,8 @@ import {
   Users,
   ShieldCheck,
   Sparkles,
+  Send,
+  UserPlus,
 } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "./shared/Logo";
@@ -80,6 +82,16 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
         title: "My Travel Plans",
         url: "/dashboard/my-travel-plans",
         icon: Plane,
+      },
+      {
+        title: "Requested Trips",
+        url: "/dashboard/requested-trips",
+        icon: Send,
+      },
+      {
+        title: "Buddy Requests",
+        url: "/dashboard/buddy-requests",
+        icon: UserPlus,
       }
     );
   }

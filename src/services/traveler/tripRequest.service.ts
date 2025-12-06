@@ -32,3 +32,30 @@ export const sendTripRequest = async (id: string) => {
     };
   }
 };
+
+export const getMyTripRequest = async () => {
+  try {
+    const res = await serverFetch.get("/trip-requests/my-request", {
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      throw new Error(data.message || "Failed to get trip request");
+    }
+
+    return data;
+  } catch (error: any) {
+    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+
+    console.error("Server Action Error:", error);
+
+    return {
+      success: false,
+      message: error.message || "Failed to get trip request",
+    };
+  }
+};
