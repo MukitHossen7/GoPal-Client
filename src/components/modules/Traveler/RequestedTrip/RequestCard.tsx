@@ -49,7 +49,10 @@ export const RequestCard = ({ request, index }: RequestCardProps) => {
 
         <div className="relative h-48 md:h-64 lg:h-full w-full lg:w-[320px] shrink-0 bg-muted">
           <Image
-            src={travelPlan?.imageUrl}
+            src={
+              travelPlan?.imageUrl ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWIkWps2twNB0C5DNnCmyLRBqVA1cNm3uGrw&s"
+            }
             alt={travelPlan?.destination}
             fill
             sizes="(max-width: 1024px) 100vw, 320px"
