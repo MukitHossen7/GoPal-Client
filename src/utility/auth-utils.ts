@@ -20,6 +20,7 @@ export const commonProtectedRoutes: RouteConfig = {
     "/change-password",
     "/payment/success",
     "/payment/fail",
+    "/payment/cancel",
     "/setting",
   ],
   patterns: [],

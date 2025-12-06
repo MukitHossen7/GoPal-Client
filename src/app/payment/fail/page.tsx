@@ -24,11 +24,14 @@ const PaymentFailPage = () => {
             Try Again
           </Button>
         </Link>
-        <Link href="/contact">
+        {/* <Link href="/contact">
           <Button size="lg" variant="outline" className="w-full sm:w-auto">
             Contact Support
           </Button>
-        </Link>
+        </Link> */}
+        <Button size="lg" variant="outline" className="w-full sm:w-auto">
+          Contact Support
+        </Button>
       </div>
     </div>
   );

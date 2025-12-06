@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react"; // 1. useRef ইমপোর্ট করুন
 import { motion } from "framer-motion";
 import { Check, Sparkles, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,9 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { getCookies } from "@/services/auth/tokenHandler";
+import { useRouter } from "next/navigation";
+import { createSubscriptionSession } from "@/services/payment/payment.service";
 
-// Monthly Plan Features (Some features are missing/limited)
 const monthlyFeatures = [
   { text: "Verified Traveler Badge", included: true },
   { text: "Unlimited Connection Requests", included: true },
@@ -25,7 +26,6 @@ const monthlyFeatures = [
   { text: "Offline Mode Access", included: false },
 ];
 
-// Yearly Plan Features (All included)
 const yearlyFeatures = [
   { text: "Verified Traveler Badge", included: true },
   { text: "Unlimited Connection Requests", included: true },
@@ -39,64 +39,63 @@ const PricingSwitch = () => {
   const [isYearly, setIsYearly] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const isSubmittingRef = useRef(false);
+
+  const router = useRouter();
+
   // --- Payment Handler ---
   const handleSubscription = async (
     planType: "Monthly" | "Yearly",
     amount: number
   ) => {
+    if (isSubmittingRef.current) return;
+
+    isSubmittingRef.current = true;
     setLoading(true);
 
     try {
-      // 1. Get Token (Change this logic based on how you store token)
       const token = await getCookies("accessToken");
-
-      console.log(token);
-
       if (!token) {
         toast.error("Please login to subscribe!");
-        // router.push("/login"); return;
-        setLoading(false);
+        router.push("/login");
+
         return;
       }
 
       console.log({ subscriptionType: planType, amount: amount });
+      const result = await createSubscriptionSession({
+        subscriptionType: planType,
+        amount: amount,
+      });
 
-      // 2. Make API Request
-      // const response = await fetch(
-      //   "https://go-pal-server.vercel.app/api/v1/payments/subscribe",
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: `${token}`, // Bearer লাগলে `Bearer ${token}` দিবা
-      //     },
-      //     body: JSON.stringify({
-      //       subscriptionType: planType,
-      //       amount: amount,
-      //     }),
-      //   }
-      // );
+      console.log(result);
 
-      // const result = await response.json();
+      if (result?.success && result?.data?.paymentUrl) {
+        toast.success("Redirecting to payment gateway...");
+        window.location.href = result.data.paymentUrl;
+      } else {
+        toast.error(
+          result?.message || "Failed to initiate payment. Try again."
+        );
 
-      // 3. Handle Success & Redirect
-      // if (result?.success && result?.data?.paymentUrl) {
-      //   toast.success("Redirecting to payment gateway...");
-      //   window.location.href = result.data.paymentUrl; // Auto Redirect
-      // } else {
-      //   toast.error("Failed to initiate payment. Try again.");
-      // }
+        isSubmittingRef.current = false;
+      }
     } catch (error) {
       console.error("Payment Error:", error);
       toast.error("Something went wrong!");
+
+      isSubmittingRef.current = false;
     } finally {
       setLoading(false);
+
+      setTimeout(() => {
+        isSubmittingRef.current = false;
+      }, 1000);
     }
   };
 
   return (
     <div className="flex flex-col items-center w-full">
-      {/* 1. Toggle Switch */}
       <div className="mb-12 flex items-center justify-center gap-4 bg-background p-2 rounded-full border shadow-sm">
         <span
           className={cn(
@@ -135,9 +134,9 @@ const PricingSwitch = () => {
         </span>
       </div>
 
-      {/* 2. Pricing Cards Grid (Fixed Max Width Issue) */}
+      {/* Pricing Cards */}
       <div className="grid w-full gap-8 md:grid-cols-2 lg:gap-10 max-w-6xl mx-auto">
-        {/* Plan 1: Monthly */}
+        {/* Monthly Plan */}
         <Card className="flex flex-col border-border bg-card shadow-sm transition-all hover:border-primary/30 hover:shadow-md h-full">
           <CardHeader>
             <h3 className="text-xl font-bold text-foreground">
@@ -179,7 +178,7 @@ const PricingSwitch = () => {
           </CardContent>
           <CardFooter>
             <Button
-              className="w-full font-semibold"
+              className="w-full font-semibold cursor-pointer"
               size="lg"
               variant="outline"
               disabled={loading}
@@ -194,7 +193,7 @@ const PricingSwitch = () => {
           </CardFooter>
         </Card>
 
-        {/* Plan 2: Yearly (Recommended) */}
+        {/* Yearly Plan */}
         <motion.div
           whileHover={{ y: -8 }}
           transition={{ type: "spring", stiffness: 300 }}
@@ -238,7 +237,7 @@ const PricingSwitch = () => {
             </CardContent>
             <CardFooter>
               <Button
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 hover:shadow-lg"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 hover:shadow-lg cursor-pointer"
                 size="lg"
                 disabled={loading}
                 onClick={() => handleSubscription("Yearly", 200)}
