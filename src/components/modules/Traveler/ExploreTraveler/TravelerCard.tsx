@@ -51,7 +51,7 @@ export default function TravelerCard({ traveler, onClick }: TravelerCardProps) {
             {traveler?.averageRating > 0 && (
               <div className="flex items-center gap-1 bg-secondary/50 px-2 py-1 rounded-md text-xs font-medium">
                 <Star className="w-3 h-3 fill-yellow-500 text-yellow-500" />
-                <span>{traveler?.averageRating} </span>
+                <span>{traveler?.averageRating.toFixed(1)} </span>
               </div>
             )}
           </div>

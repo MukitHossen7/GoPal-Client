@@ -18,6 +18,9 @@ import Image from "next/image";
 import { RequestButton } from "@/components/modules/TravelPlan/RequestButton";
 import { getTravelPlanById } from "@/services/traveler/travelPlan.service";
 import Link from "next/link";
+import { ReviewSection } from "@/components/modules/Reviews/ReviewSection";
+import { getReviews } from "@/services/review/review.service";
+import { getUserInfo } from "@/services/auth/getUserInfo";
 
 // Helper for duration calculation
 function getDays(start: string, end: string) {
@@ -33,9 +36,18 @@ export default async function TravelPlanDetailsPage({
   params: { id: string };
 }) {
   const { id } = await params;
-  const plan = await getTravelPlanById(id);
+  const { data: user } = await getUserInfo();
+  const [plan, reviewsResult] = await Promise.all([
+    getTravelPlanById(id),
+    getReviews(id),
+  ]);
 
   if (!plan) return notFound();
+
+  const reviews = reviewsResult?.data || [];
+
+  // const isOwner = currentUser?.id === plan.travelerId;
+  // const isOwner = false; // আপাতত false
 
   const heroImage =
     plan?.imageUrl ||
@@ -46,8 +58,6 @@ export default async function TravelPlanDetailsPage({
       {/* 1. Hero Section */}
       <div className="relative h-[50vh] w-full overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
-
-        {/* ✅ SOLUTION: Added fill, priority, and sizes */}
         <Image
           src={heroImage}
           alt={plan.destination}
@@ -56,7 +66,6 @@ export default async function TravelPlanDetailsPage({
           sizes="100vw"
           className="object-cover"
         />
-
         <div className="absolute bottom-0 left-0 w-full z-20 container mx-auto px-4 pb-10">
           <Badge className="mb-4 bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-1 text-sm">
             {plan?.travelType} Trip
@@ -145,6 +154,9 @@ export default async function TravelPlanDetailsPage({
               </CardContent>
             </Card>
 
+            {/* ✅ Reviews Section Added Here */}
+            <ReviewSection planId={id} reviews={reviews} user={user} />
+
             {/* Host Profile Summary */}
             <Card className="border-none shadow-md overflow-hidden">
               <div className="bg-zinc-100 dark:bg-zinc-900 p-6 flex items-center gap-6">
@@ -161,7 +173,9 @@ export default async function TravelPlanDetailsPage({
                     <div className="flex items-center text-amber-500">
                       <Star className="w-3.5 h-3.5 fill-current" />
                       <span className="ml-1 font-medium">
-                        {plan?.traveler?.averageRating || "New"}
+                        {plan?.traveler?.averageRating != null
+                          ? Number(plan.traveler.averageRating).toFixed(1)
+                          : "New"}
                       </span>
                     </div>
                   </div>
@@ -173,8 +187,7 @@ export default async function TravelPlanDetailsPage({
                 </h4>
                 <p className="text-muted-foreground text-sm">
                   &quot;I love exploring new cultures and meeting people. I
-                  ensure safe and fun trips for everyone!&quot; (This is a
-                  placeholder bio based on the user data).
+                  ensure safe and fun trips for everyone!&quot;
                 </p>
                 <Link href={`/explore-travelers/${plan?.traveler?.id}`}>
                   <Button
@@ -203,6 +216,7 @@ export default async function TravelPlanDetailsPage({
                   </div>
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
+                  {/* ... Sidebar Content ... */}
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <span className="text-muted-foreground flex items-center gap-2">
@@ -232,7 +246,6 @@ export default async function TravelPlanDetailsPage({
                     </div>
                   </div>
 
-                  {/* Preferences Tags */}
                   <div>
                     <h4 className="text-sm font-semibold mb-3">Preferences</h4>
                     <div className="flex flex-wrap gap-2">
@@ -242,13 +255,9 @@ export default async function TravelPlanDetailsPage({
                       <Badge variant="secondary" className="font-normal">
                         <CheckCircle2 className="w-3 h-3 mr-1" /> Early Bird
                       </Badge>
-                      <Badge variant="secondary" className="font-normal">
-                        <CheckCircle2 className="w-3 h-3 mr-1" /> Photography
-                      </Badge>
                     </div>
                   </div>
 
-                  {/* Action Button */}
                   <RequestButton id={plan.id} />
 
                   <p className="text-xs text-center text-muted-foreground mt-2">
@@ -257,7 +266,6 @@ export default async function TravelPlanDetailsPage({
                 </CardContent>
               </Card>
 
-              {/* Safety Badge / Trust */}
               <div className="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-4 flex items-start gap-3 border border-zinc-200 dark:border-zinc-800">
                 <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-full text-green-600">
                   <CheckCircle2 className="w-5 h-5" />

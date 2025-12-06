@@ -115,7 +115,9 @@ const TravelerCard = ({ traveler }: { traveler: ITraveler }) => {
             <div className="flex items-center gap-2" title="Average Rating">
               <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
               <span className="font-medium text-foreground">
-                {traveler.averageRating > 0 ? traveler.averageRating : "New"}
+                {traveler.averageRating > 0
+                  ? traveler.averageRating.toFixed(1)
+                  : "New"}
               </span>
               {traveler.averageRating > 0 && (
                 <span className="text-muted-foreground text-xs">/ 5.0</span>
