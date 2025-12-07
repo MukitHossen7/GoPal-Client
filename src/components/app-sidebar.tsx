@@ -44,6 +44,11 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
         icon: LayoutDashboard,
       },
       {
+        title: "Activity Logs",
+        url: "/admin/dashboard/manage-activity",
+        icon: ShieldCheck,
+      },
+      {
         title: "Manage Users",
         url: "/admin/dashboard/manage-users",
         icon: Users,
@@ -57,11 +62,6 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
         title: "Manage Reviews",
         url: "/admin/dashboard/manage-reviews",
         icon: Star,
-      },
-      {
-        title: "Activity Logs",
-        url: "/admin/dashboard/activity",
-        icon: ShieldCheck,
       }
     );
   }
