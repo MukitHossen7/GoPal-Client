@@ -61,3 +61,63 @@ export const getReviews = async (planId: string) => {
     };
   }
 };
+
+export const getAllReviews = async (queryString?: string) => {
+  try {
+    const res = await serverFetch.get(
+      `/reviews${
+        queryString ? `?${queryString}` : "?sortBy=createdAt&sortOrder=desc"
+      }`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    const data = await res.json();
+    if (!data.success) {
+      throw new Error(data.message || "Failed to fetch reviews.");
+    }
+
+    return data;
+  } catch (error: any) {
+    // Let Next.js redirect errors pass through
+    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+
+    console.error("Get All Reviews Error:", error);
+
+    return {
+      success: false,
+      message: error?.message || "Failed to fetch all reviews.",
+    };
+  }
+};
+
+export const deleteReview = async (reviewId: string) => {
+  try {
+    const res = await serverFetch.delete(`/reviews/${reviewId}`, {
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      throw new Error(data.message || "Failed to delete review.");
+    }
+
+    return data;
+  } catch (error: any) {
+    // Next.js redirect errors must pass-through
+    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+
+    console.error("Delete Review Error:", error);
+
+    return {
+      success: false,
+      message: error?.message || "Failed to delete review.",
+    };
+  }
+};

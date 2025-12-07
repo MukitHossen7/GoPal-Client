@@ -22,6 +22,7 @@ import {
   Sparkles,
   Send,
   UserPlus,
+  Star,
 } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "./shared/Logo";
@@ -51,6 +52,11 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
         title: "Manage Trips",
         url: "/admin/dashboard/manage-trips",
         icon: Plane,
+      },
+      {
+        title: "Manage Reviews",
+        url: "/admin/dashboard/manage-reviews",
+        icon: Star,
       },
       {
         title: "Activity Logs",
@@ -88,6 +94,7 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
         url: "/dashboard/requested-trips",
         icon: Send,
       },
+
       {
         title: "Buddy Requests",
         url: "/dashboard/buddy-requests",
