@@ -89,3 +89,30 @@ export async function updateProfile(formData: FormData) {
     };
   }
 }
+
+export async function softDeleteUser(travelerId: string) {
+  try {
+    const response = await serverFetch.delete(
+      `/users/soft-delete/${travelerId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.success) {
+      revalidateTag("USERS", { expire: 0 });
+    }
+
+    return result;
+  } catch (error: any) {
+    console.error("Soft Delete Error:", error);
+    return {
+      success: false,
+      message: error.message || "Something went wrong while deleting user.",
+    };
+  }
+}

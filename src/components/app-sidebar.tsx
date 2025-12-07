@@ -44,17 +44,17 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
       },
       {
         title: "Manage Users",
-        url: "/admin/users",
+        url: "/admin/dashboard/manage-users",
         icon: Users,
       },
       {
         title: "Manage Trips",
-        url: "/admin/trips",
+        url: "/admin/dashboard/manage-trips",
         icon: Plane,
       },
       {
         title: "Activity Logs",
-        url: "/admin/activity",
+        url: "/admin/dashboard/activity",
         icon: ShieldCheck,
       }
     );
