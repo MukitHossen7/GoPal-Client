@@ -67,23 +67,23 @@ const PublicFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/explore-travelers"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  About Us
+                  Explore Travelers
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/explore"
+                  href="/Membership Plans"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Find a Buddy
+                  membership
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/travel-plans"
+                  href="#"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Travel Plans
@@ -100,7 +100,7 @@ const PublicFooter = () => {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
-                  href="/faq"
+                  href="#"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   FAQ
@@ -108,7 +108,7 @@ const PublicFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/safety"
+                  href="#"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Safety Tips
@@ -116,7 +116,7 @@ const PublicFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="#"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Terms of Service
@@ -124,7 +124,7 @@ const PublicFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/privacy"
+                  href="#"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Privacy Policy

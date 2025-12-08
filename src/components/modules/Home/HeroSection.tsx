@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="relative flex h-[85vh] w-full items-center justify-center overflow-hidden">
+    <section className="relative flex min-h-[85vh] w-full items-center justify-center overflow-hidden py-20 md:py-0">
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 z-0 h-full w-full bg-cover bg-center bg-no-repeat"

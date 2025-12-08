@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Why Travelers Choose <span className="text-primary">GoPal</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">

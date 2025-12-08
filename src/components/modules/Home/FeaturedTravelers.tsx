@@ -14,7 +14,7 @@ const FeaturedTravelers = ({ matchesTravelers }: FeaturedTravelersProps) => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Connect with Like-Minded Travelers
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">

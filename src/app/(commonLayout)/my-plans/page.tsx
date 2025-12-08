@@ -34,7 +34,7 @@ export default async function MyPlansPage(props: Props) {
       <BlurFade delay={0.1} inView>
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 flex items-center gap-3">
+            <h1 className="text-3xl md:text-4xl tracking-tight font-bold text-gray-900 flex items-center gap-3">
               <Plane className="w-8 h-8 text-primary" /> My Travel Plans
             </h1>
             <p className="text-gray-500 mt-2">

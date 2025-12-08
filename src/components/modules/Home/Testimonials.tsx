@@ -151,7 +151,7 @@ const Testimonials = () => {
   return (
     <section className="py-24 bg-muted/30">
       <div className="mb-12 text-center container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
           Trusted by Adventurers
         </h2>
         <p className="mt-4 text-muted-foreground">

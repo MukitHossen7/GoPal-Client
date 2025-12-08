@@ -11,7 +11,7 @@ const MembershipPage = () => {
           <CheckCircle2 className="mr-1.5 h-3.5 w-3.5" />
           Join 5,000+ Premium Members
         </div>
-        <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-6xl">
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
           Upgrade Your{" "}
           <span className="text-primary text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             Journey

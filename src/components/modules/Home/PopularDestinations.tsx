@@ -1,30 +1,32 @@
 import Image from "next/image";
 import { MapPin } from "lucide-react";
+import Link from "next/link";
 
 // Mock Data (Replace with API later)
 const destinations = [
   {
     id: 1,
     name: "Bali, Indonesia",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4",
+    image: "https://i.ibb.co/xt4jqfzv/istockphoto-675172642-612x612.jpg",
     travelers: 120,
   },
   {
     id: 2,
     name: "Paris, France",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
+    image: "https://i.ibb.co/1fKWgKh2/istockphoto-635758088-612x612.jpg",
     travelers: 85,
   },
   {
     id: 3,
     name: "Kyoto, Japan",
-    image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e",
+    image:
+      "https://i.ibb.co/tMy2nNv1/67b7b12ace55b1bf141eb8f3-638e6beeed8f00344dc59789-japademy-kyoto-kinkakuji-temple-one.jpg",
     travelers: 200,
   },
   {
     id: 4,
     name: "Santorini, Greece",
-    image: "https://images.unsplash.com/photo-1613395877344-13d4c79e4df1",
+    image: "https://i.ibb.co/ZRmXc3y1/istockphoto-1145450965-612x612.jpg",
     travelers: 95,
   },
 ];
@@ -35,19 +37,19 @@ const PopularDestinations = () => {
       <div className="container mx-auto px-6">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
               Trending Destinations
             </h2>
             <p className="mt-2 text-muted-foreground">
               Places travelers are heading to right now
             </p>
           </div>
-          <a
-            href="/explore"
+          <Link
+            href="/travel-plans"
             className="hidden text-primary hover:underline md:block"
           >
             View all destinations →
-          </a>
+          </Link>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

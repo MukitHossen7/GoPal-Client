@@ -29,7 +29,7 @@ const HowItWorks = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             How GoPal Works
           </h2>
           <p className="mt-4 text-muted-foreground">
