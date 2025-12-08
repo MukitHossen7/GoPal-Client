@@ -3,6 +3,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { getUserInfo } from "@/services/auth/getUserInfo";
 
+export const dynamic = "force-dynamic";
+
 const CommonDashboardLayout = async ({
   children,
 }: {

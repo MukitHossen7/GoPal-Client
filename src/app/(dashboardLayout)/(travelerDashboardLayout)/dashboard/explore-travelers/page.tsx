@@ -1,7 +1,9 @@
 import TravelersGrid from "@/components/modules/Traveler/ExploreTraveler/TravelersGrid";
+import TravelLoader from "@/components/shared/TravelLoader";
 import { getRecommendedTravelers } from "@/services/traveler/traveler.service";
 
 import { Sparkles } from "lucide-react";
+import { Suspense } from "react";
 
 const ExploreTravelersPage = async () => {
   const { data: travelers } = await getRecommendedTravelers();
@@ -29,7 +31,10 @@ const ExploreTravelersPage = async () => {
       </div>
 
       {/* Main Grid Section */}
-      <TravelersGrid travelers={travelers} />
+
+      <Suspense fallback={<TravelLoader fullScreen={false} />}>
+        <TravelersGrid travelers={travelers} />
+      </Suspense>
     </div>
   );
 };
