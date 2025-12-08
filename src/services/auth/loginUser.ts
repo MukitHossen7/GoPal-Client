@@ -77,7 +77,7 @@ export const loginUser = async (_currentState: any, formData: any) => {
     await setCookies("accessToken", accessTokenObject.accessToken, {
       httpOnly: true,
       secure: true,
-      maxAge: parseInt(accessTokenObject["Max-Age"]) || 1000 * 60 * 60,
+      maxAge: parseInt(accessTokenObject["Max-Age"]) || 1000 * 60 * 60 * 24,
       path: accessTokenObject.Path || "/",
       sameSite: accessTokenObject["SameSite"] || "none",
     });
