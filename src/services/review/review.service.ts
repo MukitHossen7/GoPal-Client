@@ -2,6 +2,7 @@
 "use server";
 
 import { serverFetch } from "@/utility/serverFetchHelper";
+import { revalidatePath } from "next/cache";
 
 export const addReview = async (
   planId: string,
@@ -108,6 +109,9 @@ export const updateReview = async (
     if (!result.success) {
       throw new Error(result.message || "Failed to update review");
     }
+    if (result.success) {
+      revalidatePath("/dashboard/my-reviews");
+    }
 
     return result;
   } catch (error: any) {
@@ -164,6 +168,9 @@ export const deleteReview = async (reviewId: string) => {
 
     if (!data.success) {
       throw new Error(data.message || "Failed to delete review.");
+    }
+    if (data.success) {
+      revalidatePath("/dashboard/my-reviews");
     }
 
     return data;
