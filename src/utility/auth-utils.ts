@@ -16,7 +16,6 @@ export const commonProtectedRoutes: RouteConfig = {
   exact: [
     "/my-profile",
     "/my-plans",
-    "/travel-plans",
     "/change-password",
     "/payment/success",
     "/payment/fail",

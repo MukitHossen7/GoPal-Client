@@ -8,7 +8,7 @@ import Link from "next/link";
 const TravelerCard = ({ traveler }: { traveler: ITraveler }) => {
   return (
     <Link href={`/explore-travelers/${traveler?.id}`}>
-      <Card className="group h-full relative flex flex-col justify-between overflow-hidden border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-md">
+      <Card className="group h-full relative flex flex-col justify-between overflow-hidden border bg-card transition-all duration-300 hover:border-primary/50 shadow-none">
         {/* Top Decorator Line */}
         <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-primary/40 via-primary to-primary/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 

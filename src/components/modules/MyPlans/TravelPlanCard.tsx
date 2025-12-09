@@ -24,7 +24,7 @@ export default function TravelPlanCard({ plan }: TravelPlanCardProps) {
 
   return (
     <Link href={`/travel-plans/${plan.id}`}>
-      <Card className="group overflow-hidden border-0 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full bg-white/50 backdrop-blur-sm">
+      <Card className="group h-full w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-black transition-colors hover:border-gray-300 dark:hover:border-gray-700 shadow-none">
         {/* Image Section */}
         <div className="relative h-48 w-full overflow-hidden">
           <Image

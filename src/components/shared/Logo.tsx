@@ -7,7 +7,6 @@ interface LogoProps {
 }
 
 export const Logo = ({ variant = "full", className = "" }: LogoProps) => {
-  // ১. মডার্ন আইকনিক লোগো (প্লেন + টেক্সট) - অ্যাডভেঞ্চার বোঝায়
   if (variant === "full") {
     return (
       <div className={`flex items-center gap-2 ${className}`}>
@@ -24,7 +23,6 @@ export const Logo = ({ variant = "full", className = "" }: LogoProps) => {
     );
   }
 
-  // ২. পিন স্টাইল লোগো (লোকেশন পিন) - মিটআপ বা ডেস্টিনেশন বোঝায়
   if (variant === "minimal") {
     return (
       <div className={`flex items-center gap-1 ${className}`}>
@@ -36,7 +34,6 @@ export const Logo = ({ variant = "full", className = "" }: LogoProps) => {
     );
   }
 
-  // ৩. শুধুমাত্র আইকন (মোবাইল বা ফুটারের ছোট ভার্সনের জন্য)
   if (variant === "icon") {
     return (
       <div

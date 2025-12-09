@@ -26,12 +26,13 @@ const PublicNavbar = ({
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Explore Travelers", path: "/explore-travelers" },
+    { name: "Find Travel Buddy", path: "/travel-plans" },
     { name: "Membership Plans", path: "/membership" },
   ];
 
-  if (authData?.data?.user?.role === "TRAVELER") {
-    navLinks.push({ name: "Travel Plans", path: "/travel-plans" });
-  }
+  // if (authData?.data?.user?.role === "TRAVELER") {
+  //   navLinks.push({ name: "Travel Plans", path: "/travel-plans" });
+  // }
 
   const isActive = (path: string) => pathname === path;
 

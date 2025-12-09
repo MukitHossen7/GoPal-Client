@@ -16,7 +16,7 @@ const TravelerDashboardPage = async () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">
-              Welcome back, {data.user.name.split(" ")[0]}! 👋
+              Welcome back, {data?.user?.name.split(" ")[0]}! 👋
             </h1>
             <p className="text-muted-foreground mt-1">
               Here&apos;s what&apos;s happening with your travel plans today.
@@ -32,7 +32,7 @@ const TravelerDashboardPage = async () => {
 
       {/* 2. Stats Section */}
       <BlurFade delay={0.2} inView>
-        <DashboardStats stats={data.stats} />
+        <DashboardStats stats={data?.stats} />
       </BlurFade>
 
       {/* 3. Main Content Grid */}
@@ -81,7 +81,7 @@ const TravelerDashboardPage = async () => {
         {/* Right Column (1/3) - Sidebar */}
         <div className="lg:col-span-1">
           <BlurFade delay={0.5} inView>
-            <ProfileSummary user={data.user} />
+            <ProfileSummary user={data?.user} />
           </BlurFade>
         </div>
       </div>

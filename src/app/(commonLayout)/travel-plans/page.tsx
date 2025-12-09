@@ -31,7 +31,7 @@ export default async function TravelPlansPage(props: Props) {
   const { data: plans, meta }: { data: ITravelPlan[]; meta: IMeta } =
     await getTravelPlans(queryString);
 
-  const showSearch = plans && plans.length > 0;
+  // const showSearch = plans && plans.length > 0;
 
   return (
     <div className="min-h-screen bg-zinc-50/50 dark:bg-black py-12">

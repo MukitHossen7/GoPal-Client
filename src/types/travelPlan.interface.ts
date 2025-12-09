@@ -3,6 +3,7 @@ export interface Traveler {
   name: string;
   email: string;
   averageRating: number;
+  profileImage: string;
 }
 
 export interface ITravelPlan {

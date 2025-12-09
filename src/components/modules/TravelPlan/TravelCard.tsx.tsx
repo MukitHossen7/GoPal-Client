@@ -36,7 +36,7 @@ export function TravelCard({ plan, index }: TravelCardProps) {
       className="h-full"
     >
       <Link href={`/travel-plans/${plan.id}`}>
-        <Card className="h-full overflow-hidden border-none shadow-md hover:shadow-xl transition-all duration-300 group bg-white dark:bg-zinc-900">
+        <Card className="group h-full w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-black transition-colors hover:border-gray-300 dark:hover:border-gray-700 shadow-none">
           {/* Image Container */}
           <div className="relative h-48 w-full overflow-hidden">
             <Image
