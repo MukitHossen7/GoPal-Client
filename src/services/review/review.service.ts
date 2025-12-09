@@ -62,6 +62,66 @@ export const getReviews = async (planId: string) => {
   }
 };
 
+export const getMyReviews = async () => {
+  try {
+    const res = await serverFetch.get(`/reviews/my-reviews`, {
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!data.success) {
+      throw new Error(data.message || "Failed to fetch my reviews");
+    }
+
+    return data;
+  } catch (error: any) {
+    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+    console.log(error);
+    return {
+      success: false,
+      error: error.message || "Failed to fetch my reviews",
+    };
+  }
+};
+
+export const updateReview = async (
+  reviewId: string,
+  data: { rating?: number; comment?: string }
+) => {
+  try {
+    const reviewData = {
+      rating: Number(data.rating),
+      comment: data.comment,
+    };
+    const res = await serverFetch.patch(`/reviews/${reviewId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reviewData),
+    });
+
+    const result = await res.json();
+
+    if (!result.success) {
+      throw new Error(result.message || "Failed to update review");
+    }
+
+    return result;
+  } catch (error: any) {
+    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw error;
+    }
+    console.log("Update Review Error:", error);
+    return {
+      success: false,
+      error: error.message || "Failed to update review",
+    };
+  }
+};
+
 export const getAllReviews = async (queryString?: string) => {
   try {
     const res = await serverFetch.get(
