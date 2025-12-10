@@ -6,8 +6,10 @@ import PopularDestinations from "@/components/modules/Home/PopularDestinations";
 import StatsSection from "@/components/modules/Home/StatsSection";
 import Testimonials from "@/components/modules/Home/Testimonials";
 import WhyChooseUs from "@/components/modules/Home/WhyChooseUs";
+import { getUserInfo } from "@/services/auth/getUserInfo";
 
 const HomePage = async () => {
+  const { data: user } = await getUserInfo();
   return (
     <main className="min-h-screen bg-background">
       {/* 1. Hero Section: First Impression */}
@@ -17,8 +19,7 @@ const HomePage = async () => {
       <StatsSection />
 
       {/* 3. Featured Plans: The most important dynamic content */}
-      {/* লগইন ইউজার তার ম্যাচ পাবে, আর গেস্টরা রিয়েল ট্রিপের স্লাইডার দেখবে */}
-      <FeaturedPlans />
+      {user && <FeaturedPlans />}
 
       {/* 4. Popular Destinations: General Inspiration */}
       <PopularDestinations />

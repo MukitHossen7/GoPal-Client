@@ -43,7 +43,7 @@ const WhyChooseUs = () => {
       {/* Background Decorative Blob */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             Why Travelers Choose <span className="text-primary">GoPal</span>

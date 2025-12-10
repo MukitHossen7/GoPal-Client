@@ -45,7 +45,7 @@ export default async function TravelPlansPage(props: Props) {
 
   return (
     <div className="min-h-screen bg-zinc-50/50 dark:bg-black py-12">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="container mx-auto px-4 ">
         {/* Header Section */}
         <BlurFade delay={0.1} inView>
           <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-6">
@@ -63,7 +63,7 @@ export default async function TravelPlansPage(props: Props) {
 
         {/* --- Advanced Filter Section (UPDATED) --- */}
         <BlurFade delay={0.15} inView>
-          <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-none mb-10">
+          <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl border-none border-gray-200 dark:border-zinc-800 shadow-none mb-10">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
               {/* 1. Search Input (Destination/Title) - Takes larger space */}
               <div className="md:col-span-5 lg:col-span-5">

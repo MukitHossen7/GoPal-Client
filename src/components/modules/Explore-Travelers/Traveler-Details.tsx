@@ -7,7 +7,7 @@ export function TravelerDetails({ traveler }: { traveler: ITraveler }) {
   return (
     <div className="space-y-6">
       {/* Bio Section */}
-      <Card>
+      <Card className="shadow-none border-none">
         <CardHeader>
           <CardTitle className="text-lg">About Me</CardTitle>
         </CardHeader>
@@ -20,7 +20,7 @@ export function TravelerDetails({ traveler }: { traveler: ITraveler }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Interests */}
-        <Card>
+        <Card className="shadow-none border-none">
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <Mountain size={18} className="text-primary" />
@@ -43,7 +43,7 @@ export function TravelerDetails({ traveler }: { traveler: ITraveler }) {
         </Card>
 
         {/* Visited Countries */}
-        <Card>
+        <Card className="shadow-none border-none">
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <Plane size={18} className="text-primary" />

@@ -40,7 +40,7 @@ export default async function ExplorePage(props: Props) {
 
   return (
     <div className="min-h-screen bg-gray-50/50 dark:bg-black pt-10 pb-20">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+      <div className="container mx-auto px-4 ">
         {/* --- Header Section --- */}
         <div className="mb-8 space-y-2">
           <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl flex items-center gap-3">
@@ -53,7 +53,7 @@ export default async function ExplorePage(props: Props) {
         </div>
 
         {/* --- Search & Filter Toolbar --- */}
-        <div className="mb-8 bg-white dark:bg-zinc-900 p-4 rounded-xl border shadow-none flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="mb-8 bg-white dark:bg-zinc-900 p-4 rounded-xl border-none shadow-none flex flex-col md:flex-row gap-4 items-center justify-between">
           {/* Search Input (Takes available space) */}
           <div className="w-full md:flex-1">
             <SearchFilter

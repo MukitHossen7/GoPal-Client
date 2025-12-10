@@ -45,7 +45,7 @@ const Counter = ({ from, to }: { from: number; to: number }) => {
 const StatsSection = () => {
   return (
     <section className="border-b bg-background py-10">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:divide-x lg:divide-border">
           {/* Stat 1: Total Travelers (With Avatar Stack) */}
           <div className="flex flex-col items-center justify-center gap-2 text-center">

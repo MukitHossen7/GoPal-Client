@@ -8,7 +8,7 @@ const CallToAction = () => {
       <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
       <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
 
-      <div className="container relative z-10 mx-auto px-6 text-center">
+      <div className="container relative z-10 mx-auto px-4 text-center">
         <h2 className="mb-6 text-3xl font-bold tracking-tight text-white md:text-5xl">
           Ready to Start Your Adventure?
         </h2>

@@ -7,7 +7,7 @@ import { MapPin, ShieldCheck, Star } from "lucide-react";
 
 export function TravelerProfileCard({ traveler }: { traveler: ITraveler }) {
   return (
-    <Card className="relative overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm">
+    <Card className="relative overflow-hidden border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm shadow-none border-none">
       {/* Cover/Background Pattern */}
       <div className="h-32 bg-gradient-to-r from-blue-500/10 to-purple-500/10 w-full absolute top-0 left-0 z-0" />
 
@@ -56,7 +56,9 @@ export function TravelerProfileCard({ traveler }: { traveler: ITraveler }) {
                 className="flex items-center gap-1 border-yellow-500/50 text-yellow-600"
               >
                 <Star size={12} fill="currentColor" />{" "}
-                {traveler?.averageRating > 0 ? traveler.averageRating : "New"}
+                {traveler?.averageRating > 0
+                  ? traveler.averageRating.toFixed(1)
+                  : "New"}
               </Badge>
             </div>
           </div>

@@ -38,7 +38,7 @@ const PublicNavbar = ({
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* 1. Logo Section */}
           <Link href="/" className="flex-shrink-0">

@@ -10,7 +10,7 @@ const Testimonials = async () => {
 
   return (
     <section className="py-20 bg-muted/30">
-      <div className="mb-10 text-center container mx-auto px-6">
+      <div className="mb-10 text-center container mx-auto px-4">
         <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
           Trusted by Adventurers
         </h2>

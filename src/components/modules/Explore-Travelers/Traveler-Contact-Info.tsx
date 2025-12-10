@@ -7,7 +7,7 @@ import { ITraveler } from "@/types/traveler.interface";
 
 export function TravelerContactInfo({ traveler }: { traveler: ITraveler }) {
   return (
-    <Card className="h-full">
+    <Card className="h-full shadow-none border-none">
       <CardHeader>
         <CardTitle className="text-lg">Contact & Info</CardTitle>
       </CardHeader>
