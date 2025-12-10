@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Dialog,
@@ -17,18 +17,21 @@ import { Star, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
-import { addReview } from "@/services/review/review.service";
+import { addReview, updateReview } from "@/services/review/review.service";
+import { IReview } from "@/types/review.interface";
 
 interface ReviewFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   planId: string;
+  initialData?: IReview | null;
 }
 
 export const ReviewFormModal = ({
   isOpen,
   onClose,
   planId,
+  initialData,
 }: ReviewFormModalProps) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -39,8 +42,21 @@ export const ReviewFormModal = ({
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (isOpen) {
+      if (initialData) {
+        setRating(initialData.rating);
+        setValue("comment", initialData.comment);
+      } else {
+        setRating(0);
+        reset({ comment: "" });
+      }
+    }
+  }, [isOpen, initialData, setValue, reset]);
 
   const onSubmit = async (data: any) => {
     if (rating === 0) {
@@ -50,16 +66,24 @@ export const ReviewFormModal = ({
 
     setIsLoading(true);
     try {
-      const res = await addReview(planId, { ...data, rating });
+      let res;
+
+      if (initialData) {
+        // --- UPDATE MODE ---
+        res = await updateReview(initialData.id, planId, { ...data, rating });
+      } else {
+        // --- CREATE MODE ---
+        res = await addReview(planId, { ...data, rating });
+      }
 
       if (res?.success) {
-        toast.success("Review submitted successfully!");
+        toast.success(initialData ? "Review updated!" : "Review submitted!");
         reset();
         setRating(0);
         router.refresh();
         onClose();
       } else {
-        toast.error(res.error || "Failed to submit review");
+        toast.error(res.error || "Operation failed");
       }
     } catch (error) {
       toast.error("Something went wrong!");
@@ -72,7 +96,9 @@ export const ReviewFormModal = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Share your experience</DialogTitle>
+          <DialogTitle>
+            {initialData ? "Update your review" : "Share your experience"}
+          </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-2">
@@ -130,7 +156,7 @@ export const ReviewFormModal = ({
             </Button>
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Submit Review
+              {initialData ? "Update Review" : "Submit Review"}
             </Button>
           </DialogFooter>
         </form>

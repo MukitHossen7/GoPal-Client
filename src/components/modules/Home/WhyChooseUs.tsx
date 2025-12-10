@@ -39,7 +39,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="py-20 bg-background relative overflow-hidden">
       {/* Background Decorative Blob */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
 
@@ -61,7 +61,7 @@ const WhyChooseUs = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative rounded-2xl border bg-card p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group relative rounded-2xl border bg-card p-8 shadow-none hover:shadow-md transition-all duration-300 hover:-translate-y-1"
             >
               <div
                 className={`mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl ${feature.color}`}

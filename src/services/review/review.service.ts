@@ -10,9 +10,7 @@ export const addReview = async (
 ) => {
   try {
     const res = await serverFetch.post("/reviews", {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         travelPlanId: planId,
         rating: Number(data.rating),
@@ -20,24 +18,14 @@ export const addReview = async (
       }),
     });
     const result = await res.json();
+    if (!result.success) throw new Error(result.message);
 
-    if (!result.success) {
-      throw new Error(result.message || "Review create failed");
-    }
-
+    revalidatePath(`/travel-plans/${planId}`);
     return result;
   } catch (error: any) {
-    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
-      throw error;
-    }
-    console.log(error);
-    return {
-      success: false,
-      error: error.message || "Review create failed",
-    };
+    return { success: false, error: error.message };
   }
 };
-
 export const getReviews = async (planId: string) => {
   try {
     const res = await serverFetch.get(`/reviews/${planId}`, {
@@ -90,6 +78,7 @@ export const getMyReviews = async () => {
 
 export const updateReview = async (
   reviewId: string,
+  planId: string, // planId রিসিভ করতে হবে revalidate এর জন্য
   data: { rating?: number; comment?: string }
 ) => {
   try {
@@ -98,31 +87,22 @@ export const updateReview = async (
       comment: data.comment,
     };
     const res = await serverFetch.patch(`/reviews/${reviewId}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(reviewData),
     });
 
     const result = await res.json();
 
-    if (!result.success) {
-      throw new Error(result.message || "Failed to update review");
-    }
-    if (result.success) {
-      revalidatePath("/dashboard/my-reviews");
-    }
+    if (!result.success) throw new Error(result.message);
+
+    // পেজ রিফ্রেশ (যাতে আপডেট সাথে সাথে দেখা যায়)
+    revalidatePath(`/travel-plans/${planId}`);
+    revalidatePath("/dashboard/my-reviews");
 
     return result;
   } catch (error: any) {
-    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
-      throw error;
-    }
     console.log("Update Review Error:", error);
-    return {
-      success: false,
-      error: error.message || "Failed to update review",
-    };
+    return { success: false, error: error.message };
   }
 };
 
@@ -158,7 +138,7 @@ export const getAllReviews = async (queryString?: string) => {
   }
 };
 
-export const deleteReview = async (reviewId: string) => {
+export const deleteReview = async (reviewId: string, planId: string) => {
   try {
     const res = await serverFetch.delete(`/reviews/${reviewId}`, {
       cache: "no-store",
@@ -166,25 +146,15 @@ export const deleteReview = async (reviewId: string) => {
 
     const data = await res.json();
 
-    if (!data.success) {
-      throw new Error(data.message || "Failed to delete review.");
-    }
-    if (data.success) {
-      revalidatePath("/dashboard/my-reviews");
-    }
+    if (!data.success) throw new Error(data.message);
+
+    // পেজ রিফ্রেশ (যাতে ডিলেটেড আইটেম চলে যায়)
+    revalidatePath(`/travel-plans/${planId}`);
+    revalidatePath("/dashboard/my-reviews");
 
     return data;
   } catch (error: any) {
-    // Next.js redirect errors must pass-through
-    if (error?.digest?.startsWith("NEXT_REDIRECT")) {
-      throw error;
-    }
-
     console.error("Delete Review Error:", error);
-
-    return {
-      success: false,
-      message: error?.message || "Failed to delete review.",
-    };
+    return { success: false, message: error?.message };
   }
 };

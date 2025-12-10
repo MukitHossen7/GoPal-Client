@@ -27,7 +27,6 @@ export default async function TravelPlansPage(props: Props) {
   const searchParams = await props.searchParams;
   const params = new URLSearchParams();
 
-  // প্যারামিটার প্রসেসিং
   Object.keys(searchParams).forEach((key) => {
     const value = searchParams[key];
     if (value) {

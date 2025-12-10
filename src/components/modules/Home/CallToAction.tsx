@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const CallToAction = () => {
   return (
-    <section className="relative py-24 bg-primary overflow-hidden">
+    <section className="relative py-20 bg-primary overflow-hidden">
       {/* Decorative Circles */}
       <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
       <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 h-80 w-80 rounded-full bg-white/10 blur-3xl" />

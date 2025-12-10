@@ -54,7 +54,7 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
       variants={containerVariants}
       className="w-full max-w-md mx-auto"
     >
-      <Card className="border-none shadow-md bg-white/90 backdrop-blur-sm dark:bg-card/90 overflow-hidden">
+      <Card className="border shadow-none bg-white/90 backdrop-blur-sm dark:bg-card/90 overflow-hidden">
         {/* Decorative Top Line */}
         <div className="h-2 w-full bg-gradient-to-r from-primary via-blue-400 to-primary" />
 

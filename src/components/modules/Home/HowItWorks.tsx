@@ -41,7 +41,7 @@ const HowItWorks = () => {
           {steps.map((step) => (
             <div
               key={step.id}
-              className="group relative rounded-2xl border bg-card p-8 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              className="group relative rounded-2xl border bg-card p-8 text-center  transition-all hover:-translate-y-1 shadow-none hover:shadow-md"
             >
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                 <step.icon size={32} />

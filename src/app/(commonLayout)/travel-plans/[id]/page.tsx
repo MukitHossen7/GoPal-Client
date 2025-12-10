@@ -70,7 +70,7 @@ export default async function TravelPlanDetailsPage({
           <Badge className="mb-4 bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-1 text-sm">
             {plan?.travelType} Trip
           </Badge>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-2 shadow-sm">
+          <h1 className="text-4xl md:text-6xl tracking-tight font-extrabold text-white mb-2 shadow-sm">
             {plan?.title}
           </h1>
           <div className="flex items-center text-white/90 gap-4 text-lg">
@@ -86,7 +86,7 @@ export default async function TravelPlanDetailsPage({
           {/* 2. Main Content (Left Column) */}
           <div className="lg:col-span-2 space-y-8">
             {/* Description Card */}
-            <Card className="border-none shadow-md">
+            <Card className="border-none shadow-none">
               <CardHeader>
                 <CardTitle className="text-2xl">About this Trip</CardTitle>
               </CardHeader>
@@ -129,7 +129,7 @@ export default async function TravelPlanDetailsPage({
             </Card>
 
             {/* Itinerary Section */}
-            <Card className="border-none shadow-md">
+            <Card className="border-none shadow-none">
               <CardHeader>
                 <CardTitle className="text-2xl">Itinerary Plan</CardTitle>
               </CardHeader>
@@ -158,7 +158,7 @@ export default async function TravelPlanDetailsPage({
             <ReviewSection planId={id} reviews={reviews} user={user} />
 
             {/* Host Profile Summary */}
-            <Card className="border-none shadow-md overflow-hidden">
+            <Card className="border-none shadow-none overflow-hidden">
               <div className="bg-zinc-100 dark:bg-zinc-900 p-6 flex items-center gap-6">
                 <Avatar className="w-20 h-20 border-4 border-white dark:border-black shadow-sm">
                   <AvatarFallback className="text-2xl">
@@ -204,7 +204,7 @@ export default async function TravelPlanDetailsPage({
           {/* 3. Sidebar (Right Column) - Sticky */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <Card className="shadow-xl border-primary/10 border-2">
+              <Card className="shadow-none border-primary/10 border-2">
                 <CardHeader className="bg-primary/5 pb-4">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-muted-foreground">

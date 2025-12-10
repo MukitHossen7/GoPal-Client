@@ -53,10 +53,10 @@ const PopularDestinations = () => {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {destinations.map((dest) => (
+          {destinations?.map((dest) => (
             <div
               key={dest.id}
-              className="group relative overflow-hidden rounded-xl bg-card shadow-sm transition-all hover:shadow-lg"
+              className="group relative overflow-hidden rounded-xl bg-card shadow-none transition-all "
             >
               <div className="relative h-64 w-full overflow-hidden">
                 <Image

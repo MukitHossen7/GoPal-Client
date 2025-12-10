@@ -99,11 +99,6 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
         title: "Buddy Requests",
         url: "/dashboard/buddy-requests",
         icon: UserPlus,
-      },
-      {
-        title: "My Reviews",
-        url: "/dashboard/my-reviews",
-        icon: Star,
       }
     );
   }
