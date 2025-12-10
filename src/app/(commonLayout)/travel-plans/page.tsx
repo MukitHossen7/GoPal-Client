@@ -1,20 +1,33 @@
 import BlurFade from "@/components/magicui/blur-fade";
-
 import { getTravelPlans } from "@/services/traveler/travelPlan.service";
 import { IMeta, ITravelPlan } from "@/types/travelPlan.interface";
-import { SearchX, SlidersHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { SearchX } from "lucide-react";
 import SearchFilter from "@/components/shared/SearchFilter";
-import { TravelCard } from "@/components/modules/TravelPlan/TravelCard.tsx";
+
+import { DateRangeFilter } from "@/components/shared/DateRangeFilter";
+
 import Pagination from "@/components/shared/Pagination";
+import { TravelCard } from "@/components/modules/TravelPlan/TravelCard.tsx";
+import SelectFilter from "@/components/shared/SelectFilter";
+// import { TravelCard } from "@/components/modules/TravelPlan/TravelCard.tsx";
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
+const travelTypeOptions = [
+  { label: "Solo Adventure", value: "SOLO" },
+  { label: "Family Trip", value: "FAMILY" },
+  { label: "Friends Trip", value: "FRIENDS" },
+  { label: "Couple Getaway", value: "COUPLE" },
+  { label: "Group Tour", value: "GROUP" },
+];
+
 export default async function TravelPlansPage(props: Props) {
   const searchParams = await props.searchParams;
   const params = new URLSearchParams();
+
+  // প্যারামিটার প্রসেসিং
   Object.keys(searchParams).forEach((key) => {
     const value = searchParams[key];
     if (value) {
@@ -31,37 +44,49 @@ export default async function TravelPlansPage(props: Props) {
   const { data: plans, meta }: { data: ITravelPlan[]; meta: IMeta } =
     await getTravelPlans(queryString);
 
-  // const showSearch = plans && plans.length > 0;
-
   return (
     <div className="min-h-screen bg-zinc-50/50 dark:bg-black py-12">
       <div className="container mx-auto px-4 max-w-7xl">
-        {/* Header & Search Section */}
+        {/* Header Section */}
         <BlurFade delay={0.1} inView>
-          <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-6">
             <div className="space-y-3">
               <h1 className="text-3xl font-bold tracking-tight md:text-4xl text-zinc-900 dark:text-white flex items-center gap-3">
                 Explore <span className="text-primary">Travel Plans</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl">
-                Join exciting journeys, meet new friends, and explore the world
-                together. Find your perfect travel buddy today.
+                Find your perfect travel buddy by searching destination, dates,
+                or travel style.
               </p>
             </div>
+          </div>
+        </BlurFade>
 
-            {/* Conditional Search Filter */}
-
-            <div className="flex gap-2 w-full md:w-auto items-center">
-              <div className="w-full md:w-80">
+        {/* --- Advanced Filter Section (UPDATED) --- */}
+        <BlurFade delay={0.15} inView>
+          <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-none mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+              {/* 1. Search Input (Destination/Title) - Takes larger space */}
+              <div className="md:col-span-5 lg:col-span-5">
                 <SearchFilter
-                  placeholder="Search by destination or title..."
+                  placeholder="Search destination (e.g. Cox's Bazar)..."
                   paramName="searchTerm"
                 />
               </div>
-              {/* Optional Filter Button (Future Use) */}
-              <Button variant="outline" size="icon" className="shrink-0">
-                <SlidersHorizontal className="w-4 h-4" />
-              </Button>
+
+              {/* 2. Travel Type Dropdown (SelectFilter) */}
+              <div className="md:col-span-3 lg:col-span-3">
+                <SelectFilter
+                  paramName="travelType"
+                  placeholder="Travel Type"
+                  options={travelTypeOptions}
+                />
+              </div>
+
+              {/* 3. Date Range Picker (New Component) */}
+              <div className="md:col-span-4 lg:col-span-4">
+                <DateRangeFilter className="w-full" />
+              </div>
             </div>
           </div>
         </BlurFade>
@@ -86,14 +111,14 @@ export default async function TravelPlansPage(props: Props) {
                 No Plans Found
               </h3>
               <p className="text-muted-foreground max-w-sm mt-2">
-                {params.has("searchTerm")
-                  ? "We couldn't find any plans matching your search. Try different keywords."
-                  : "There are no travel plans available at the moment."}
+                We couldn&apos;t find any plans matching your filters. Try
+                adjusting your search criteria.
               </p>
             </div>
           </BlurFade>
         )}
 
+        {/* Pagination */}
         {plans && plans?.length > 0 && meta && meta.totalPages > 1 && (
           <div className="py-12 flex justify-center">
             <Pagination currentPage={meta.page} totalPage={meta.totalPages} />

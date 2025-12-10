@@ -4,7 +4,7 @@ import SearchFilter from "@/components/shared/SearchFilter";
 import SelectFilter from "@/components/shared/SelectFilter";
 import { getAllTravelers } from "@/services/traveler/traveler.service";
 import { IMeta, ITraveler } from "@/types/traveler.interface";
-import { SearchX, SlidersHorizontal, Users } from "lucide-react";
+import { SearchX, SlidersHorizontal } from "lucide-react";
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -44,7 +44,7 @@ export default async function ExplorePage(props: Props) {
         {/* --- Header Section --- */}
         <div className="mb-8 space-y-2">
           <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl flex items-center gap-3">
-            <Users className="h-8 w-8 text-primary" /> Explore Travelers
+            Explore Travelers
           </h1>
           <p className="max-w-2xl text-muted-foreground text-lg">
             Connect with travelers worldwide. Find your perfect travel buddy
@@ -53,7 +53,7 @@ export default async function ExplorePage(props: Props) {
         </div>
 
         {/* --- Search & Filter Toolbar --- */}
-        <div className="mb-8 bg-white dark:bg-zinc-900 p-4 rounded-xl border shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="mb-8 bg-white dark:bg-zinc-900 p-4 rounded-xl border shadow-none flex flex-col md:flex-row gap-4 items-center justify-between">
           {/* Search Input (Takes available space) */}
           <div className="w-full md:flex-1">
             <SearchFilter
