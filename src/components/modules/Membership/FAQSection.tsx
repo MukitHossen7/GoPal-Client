@@ -35,7 +35,7 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="mx-auto mt-24 max-w-6xl px-4 md:px-0 mb-20">
+    <section className="mx-auto mt-24 max-w-6xl px-4  mb-20">
       <div className="mb-12 text-center">
         <div className="inline-flex items-center justify-center rounded-full bg-primary/10 p-3 mb-4">
           <HelpCircle className="h-6 w-6 text-primary" />

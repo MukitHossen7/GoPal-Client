@@ -4,7 +4,7 @@ import HomeSearchBar from "./HomeSearchBar";
 
 const HeroSection = () => {
   return (
-    <section className="relative flex min-h-[85vh] w-full items-center justify-center overflow-hidden py-20 md:py-0">
+    <section className="relative flex min-h-[85vh] w-full items-center justify-center overflow-hidden py-16 md:py-20 lg:py-0">
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 z-0 h-full w-full bg-cover bg-center bg-no-repeat"
