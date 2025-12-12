@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import CallToAction from "@/components/modules/Home/CallToAction";
 import FeaturedPlans from "@/components/modules/Home/FeaturedPlans";
 import HeroSection from "@/components/modules/Home/HeroSection";
