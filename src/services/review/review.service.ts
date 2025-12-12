@@ -138,7 +138,7 @@ export const getAllReviews = async (queryString?: string) => {
   }
 };
 
-export const deleteReview = async (reviewId: string, planId: string) => {
+export const deleteReview = async (reviewId: string, planId?: string) => {
   try {
     const res = await serverFetch.delete(`/reviews/${reviewId}`, {
       cache: "no-store",
