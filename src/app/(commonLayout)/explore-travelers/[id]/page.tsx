@@ -3,6 +3,37 @@ import { TravelerContactInfo } from "@/components/modules/Explore-Travelers/Trav
 import { TravelerDetails } from "@/components/modules/Explore-Travelers/Traveler-Details";
 import { TravelerProfileCard } from "@/components/modules/Explore-Travelers/Traveler-Profile-Card";
 import { getTravelerById } from "@/services/traveler/traveler.service";
+import { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const { data: traveler } = await getTravelerById(id);
+  if (!traveler) {
+    return {
+      title: "Traveler Not Found | GoPal",
+      description: "The traveler profile you are looking for does not exist.",
+    };
+  }
+
+  return {
+    title: `${traveler.name} | Travel Buddy Profile - GoPal`,
+    description:
+      traveler.bio ||
+      `Connect with ${traveler.name} on GoPal. View their travel history, interests, and upcoming trip plans to see if you match as travel buddies.`,
+    keywords: [
+      traveler.name,
+      "Travel Buddy",
+      "GoPal Profile",
+      "Travel Companion",
+      "Trip Partner",
+    ],
+  };
+}
 
 export default async function TravelerPage({
   params,

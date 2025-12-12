@@ -23,6 +23,17 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { OverviewChart } from "@/components/modules/Admin/Dashboard/OverviewChart";
 import { ReviewChart } from "@/components/modules/Admin/Dashboard/ReviewChart";
 import { Badge } from "@/components/ui/badge";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Admin Dashboard | System Overview & Analytics - GoPal",
+  description:
+    "Administrator control panel. Monitor user growth, trip activities, revenue streams, and system health in real-time.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 // Helper function to format activity date
 const formatActivityDate = (dateString: string) => {

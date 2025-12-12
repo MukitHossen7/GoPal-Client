@@ -1,6 +1,21 @@
 import FAQSection from "@/components/modules/Membership/FAQSection";
 import PricingSwitch from "@/components/modules/Membership/PricingSwitch";
 import { CheckCircle2 } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Membership Plans | Unlock Premium Travel Features - GoPal",
+  description:
+    "Upgrade to GoPal Premium. Get your Verified Badge, enjoy unlimited messaging, priority matching, and an ad-free experience. Choose the plan that fits your journey.",
+  keywords: [
+    "GoPal Premium",
+    "Travel Subscription",
+    "Verified Traveler Badge",
+    "Premium Membership",
+    "Travel Buddy App Pricing",
+    "Ad-free Travel App",
+  ],
+};
 
 const MembershipPage = () => {
   return (

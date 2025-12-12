@@ -5,10 +5,39 @@ import { getSystemActivities } from "@/services/admin/activity.service";
 import { Activity } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils"; // Shadcn utility
+import { Metadata } from "next";
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+// ✅ Dynamic Metadata for Activity Logs
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const queryParams = await searchParams;
+  const type = (queryParams?.type as string) || "ALL";
+
+  const titleMap: Record<string, string> = {
+    ALL: "System Activity Log",
+    USER_REGISTER: "User Join Logs",
+    TRIP_CREATE: "Trip Creation Logs",
+    PAYMENT: "Financial Transactions",
+    REVIEW: "Review Activity",
+  };
+
+  const pageTitle = titleMap[type] || "Activity Log";
+
+  return {
+    title: `${pageTitle} | Admin Dashboard - GoPal`,
+    description:
+      "Monitor real-time system events, financial transactions, and user activities across the GoPal platform.",
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
+}
 
 const filters = [
   { label: "All Events", value: "ALL" },

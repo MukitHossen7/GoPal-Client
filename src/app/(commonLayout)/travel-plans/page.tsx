@@ -9,8 +9,24 @@ import { DateRangeFilter } from "@/components/shared/DateRangeFilter";
 import Pagination from "@/components/shared/Pagination";
 import { TravelCard } from "@/components/modules/TravelPlan/TravelCard.tsx";
 import SelectFilter from "@/components/shared/SelectFilter";
+import { Metadata } from "next";
 // import { TravelCard } from "@/components/modules/TravelPlan/TravelCard.tsx";
 
+export const metadata: Metadata = {
+  title: "Find Travel Buddy & Join Trips | Explore Plans - GoPal",
+  description:
+    "Browse upcoming travel itineraries created by the GoPal community. Filter by destination, date, or trip style (Solo, Couple, Group) to find your ideal travel companion.",
+  keywords: [
+    "Travel Plans",
+    "Join a Trip",
+    "Group Travel",
+    "Solo Trip Plans",
+    "Travel Itinerary",
+    "Find Travel Buddy",
+    "Vacation Planner",
+    "Bangladesh Travel",
+  ],
+};
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }

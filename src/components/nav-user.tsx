@@ -92,7 +92,7 @@ export function NavUser({
                   Account
                 </DropdownMenuItem>
               </Link>
-              <Link href="/change-password">
+              <Link href="#">
                 <DropdownMenuItem className="cursor-pointer">
                   <LockKeyhole className="mr-2 size-4" />
                   Change Password

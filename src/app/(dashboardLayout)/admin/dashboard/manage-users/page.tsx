@@ -1,6 +1,17 @@
 import UsersTable from "@/components/modules/Admin/ManageUsers/UsersTable";
 import Pagination from "@/components/shared/Pagination";
 import { getAllTravelers } from "@/services/traveler/traveler.service";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manage Users | Admin Dashboard - GoPal",
+  description:
+    "Administrator view for managing registered travelers. Search, filter, and update user accounts, verify profiles, and manage active users on GoPal.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 type SearchParams = {
   searchParams: {

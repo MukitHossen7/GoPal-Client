@@ -5,6 +5,23 @@ import SelectFilter from "@/components/shared/SelectFilter";
 import { getAllTravelers } from "@/services/traveler/traveler.service";
 import { IMeta, ITraveler } from "@/types/traveler.interface";
 import { SearchX, SlidersHorizontal } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Explore Travelers | Find Your Perfect Trip Companion - GoPal",
+  description:
+    "Connect with travelers worldwide on GoPal. Browse profiles, filter by interests and location, and find your perfect travel buddy for your next adventure.",
+  keywords: [
+    "Explore Travelers",
+    "Find Travel Buddy",
+    "Traveler Search",
+    "Backpacker Community",
+    "Travel Partner",
+    "GoPal Community",
+    "Trip Companion",
+    "Global Travelers",
+  ],
+};
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

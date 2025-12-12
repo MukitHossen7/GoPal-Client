@@ -3,6 +3,17 @@ import { EmptyState } from "@/components/modules/Traveler/RequestedTrip/EmptySta
 import { RequestCard } from "@/components/modules/Traveler/RequestedTrip/RequestCard";
 import { getMyTripRequest } from "@/services/traveler/tripRequest.service";
 import { Send } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sent Trip Requests | Track Application Status - GoPal",
+  description:
+    "View and manage your requests to join other travelers' plans. Check if your request is pending, approved, or rejected by the host.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const MyRequestTripPage = async () => {
   const { data } = await getMyTripRequest();

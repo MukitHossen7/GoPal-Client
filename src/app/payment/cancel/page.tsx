@@ -1,6 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Ban, ArrowLeft } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Payment Cancelled | Transaction Aborted - GoPal",
+  description:
+    "The payment process was cancelled. No charges were applied to your account. You can return to the membership page to select a plan again.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const PaymentCancelPage = () => {
   return (

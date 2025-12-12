@@ -1,6 +1,7 @@
 import EmptyState from "@/components/modules/Explore/EmptyState";
 import TravelCardGrid from "@/components/modules/Explore/TravelCardGrid";
 import { getTravelPlans } from "@/services/traveler/travelPlan.service";
+import { Metadata } from "next";
 
 type SearchParams = {
   searchTerm?: string;
@@ -12,6 +13,40 @@ type SearchParams = {
 type PageProps = {
   searchParams: Promise<SearchParams>;
 };
+
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const query = await searchParams;
+  const term = query.searchTerm;
+  const type = query.travelType;
+
+  let title = "Explore All Adventures | Find Your Travel Companion - GoPal";
+  let description =
+    "Browse through hundreds of travel plans. Filter by destination, travel type, and dates to find your next shared adventure on GoPal.";
+
+  if (term) {
+    const capitalizedTerm = term.charAt(0).toUpperCase() + term.slice(1);
+    title = `Trips to ${capitalizedTerm} | Find Travel Buddies - GoPal`;
+    description = `Looking for a trip to ${capitalizedTerm}? Discover detailed travel plans, itineraries, and find the perfect travel buddy for your adventure in ${capitalizedTerm}.`;
+  } else if (type) {
+    title = `${type} Travel Plans | Join a Group - GoPal`;
+    description = `Find the best ${type} travel packages and meetup opportunities. Plan your journey with like-minded travelers.`;
+  }
+
+  return {
+    title,
+    description,
+    keywords: [
+      term || "Travel Plans",
+      "Adventure Search",
+      "Find Trips",
+      "Travel Buddy",
+      "GoPal Explore",
+      "Shared Travel",
+    ],
+  };
+}
 
 const ExplorePage = async ({ searchParams }: PageProps) => {
   const query = await searchParams;

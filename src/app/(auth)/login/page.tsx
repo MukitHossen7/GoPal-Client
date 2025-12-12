@@ -3,10 +3,18 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Login - GoPal",
-  description: "Login to find your travel buddy",
+  title: "Login | GoPal - Access Your Travel Adventures",
+  description:
+    "Welcome back to GoPal! Log in to manage your travel plans, check messages from travel buddies, and discover your next destination. Secure access to your travel profile.",
+  keywords: [
+    "GoPal Login",
+    "Sign In",
+    "User Account",
+    "Travel Dashboard",
+    "Member Access",
+    "Find Travel Buddy",
+  ],
 };
-
 export default async function LoginPage({
   searchParams,
 }: {

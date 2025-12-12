@@ -1,6 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { XCircle, RefreshCcw } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Payment Failed | Transaction Declined - GoPal",
+  description:
+    "We couldn't process your payment. No charges were made to your account. Please check your payment details and try again.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const PaymentFailPage = () => {
   return (

@@ -109,7 +109,7 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
                 <Link
-                  href="/forget-password"
+                  href="#"
                   className="text-xs text-primary hover:underline font-medium"
                 >
                   Forgot password?

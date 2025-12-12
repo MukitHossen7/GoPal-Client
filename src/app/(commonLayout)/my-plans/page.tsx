@@ -4,6 +4,17 @@ import Pagination from "@/components/shared/Pagination";
 import { getMyTravelPlans } from "@/services/traveler/travelPlan.service";
 import { IMeta, ITravelPlan } from "@/types/travelPlan.interface";
 import { Plane, SearchX } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Travel Plans | Manage Your Adventures - GoPal",
+  description:
+    "View and manage your upcoming travel itineraries. Edit trip details, check schedules, and organize your journey efficiently on GoPal.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

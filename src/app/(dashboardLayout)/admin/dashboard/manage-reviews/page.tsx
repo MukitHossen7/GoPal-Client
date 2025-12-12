@@ -1,6 +1,17 @@
 import Pagination from "@/components/shared/Pagination";
 import ReviewsTable from "@/components/modules/Admin/ManageReviews/ReviewsTable"; // Adjust path
 import { getAllReviews } from "@/services/review/review.service"; // Adjust path
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manage Reviews | Admin Dashboard - GoPal",
+  description:
+    "Administrator moderation panel. Monitor user reviews, manage ratings, delete inappropriate content, and ensure community guidelines are followed on GoPal.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 type SearchParams = {
   searchParams: {

@@ -3,6 +3,17 @@
 import { RequestsTable } from "@/components/modules/Traveler/BuddyRequests/RequestsTable";
 import { getIncomingRequests } from "@/services/traveler/tripRequest.service";
 import { UserPlus } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Buddy Requests | Manage Trip Participants - GoPal",
+  description:
+    "Review incoming requests from travelers who want to join your trips. Approve compatible travel buddies, manage applications, and finalize your travel team.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const BuddyRequestsPage = async () => {
   const { data } = await getIncomingRequests();

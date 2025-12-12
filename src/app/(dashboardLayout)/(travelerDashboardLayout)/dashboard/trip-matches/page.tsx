@@ -2,6 +2,17 @@ import TripMatchGrid from "@/components/modules/Traveler/TripMatches/TripMatchGr
 import { getMatchesTravelPlan } from "@/services/traveler/travelPlan.service";
 
 import { Sparkles } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Trip Matches | Smart Recommendations - GoPal",
+  description:
+    "Discover travel plans curated just for you. Based on your interests and travel history, explore compatible trips and find your perfect travel buddies on GoPal.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const TripMatchesPage = async () => {
   const { data: matchedTrips } = await getMatchesTravelPlan();

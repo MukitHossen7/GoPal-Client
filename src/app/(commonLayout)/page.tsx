@@ -7,9 +7,27 @@ import StatsSection from "@/components/modules/Home/StatsSection";
 import Testimonials from "@/components/modules/Home/Testimonials";
 import WhyChooseUs from "@/components/modules/Home/WhyChooseUs";
 import { getUserInfo } from "@/services/auth/getUserInfo";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "GoPal | Find Your Perfect Travel Buddy & Explore the World",
+  description:
+    "Connect with compatible travelers, plan meetups, and turn solo trips into shared adventures. Join GoPal - the secure platform for finding travel companions globally.",
+  keywords: [
+    "Travel Buddy",
+    "Travel Companion",
+    "Find Travelers",
+    "Solo Travel",
+    "Travel Meetup",
+    "GoPal",
+    "Trip Planner",
+    "Backpacking",
+    "Travel Community",
+  ],
+};
 const HomePage = async () => {
   const { data: user } = await getUserInfo();
+
   return (
     <main className="min-h-screen bg-background">
       {/* 1. Hero Section: First Impression */}
@@ -19,7 +37,7 @@ const HomePage = async () => {
       <StatsSection />
 
       {/* 3. Featured Plans: The most important dynamic content */}
-      {user && <FeaturedPlans />}
+      {user && user?.user?.role === "TRAVELER" && <FeaturedPlans />}
 
       {/* 4. Popular Destinations: General Inspiration */}
       <PopularDestinations />

@@ -21,6 +21,39 @@ import Link from "next/link";
 import { ReviewSection } from "@/components/modules/Reviews/ReviewSection";
 import { getReviews } from "@/services/review/review.service";
 import { getUserInfo } from "@/services/auth/getUserInfo";
+import { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+// ✅ Dynamic Metadata Generator for Travel Details
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const plan = await getTravelPlanById(id);
+  if (!plan) {
+    return {
+      title: "Trip Not Found | GoPal",
+      description: "The travel plan you are looking for does not exist.",
+    };
+  }
+
+  const tripDate = format(new Date(plan.startDate), "MMMM d, yyyy");
+
+  return {
+    title: `${plan.title} - Trip to ${plan.destination} | GoPal`,
+    description: `Join this ${plan.travelType} trip to ${plan.destination} starting on ${tripDate}. Budget: ${plan.budgetRange}. Organized by ${plan.traveler?.name}.`,
+    keywords: [
+      plan.destination,
+      "Travel Plan",
+      plan.travelType,
+      "Group Trip",
+      "GoPal Travel",
+      "Trip Itinerary",
+    ],
+  };
+}
 
 // Helper for duration calculation
 function getDays(start: string, end: string) {

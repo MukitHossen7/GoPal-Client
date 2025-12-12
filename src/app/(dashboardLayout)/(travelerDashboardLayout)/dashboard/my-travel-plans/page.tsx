@@ -1,5 +1,16 @@
 import TravelPlanManager from "@/components/modules/Traveler/MyTravelPlan/TravelPlanManager";
 import { getMyTravelPlans } from "@/services/traveler/travelPlan.service";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Travel Plans | Manage Trips & Itineraries - GoPal",
+  description:
+    "Organize your upcoming adventures. Create new plans, update itineraries, manage trip budgets, and track your travel schedule efficiently from your GoPal dashboard.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const MyTravelPlansPage = async () => {
   const { data: travelPlans } = await getMyTravelPlans();

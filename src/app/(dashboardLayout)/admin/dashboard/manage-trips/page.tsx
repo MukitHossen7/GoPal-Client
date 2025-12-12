@@ -1,6 +1,17 @@
 import Pagination from "@/components/shared/Pagination";
 import TripsTable from "@/components/modules/Admin/ManageTrips/TripsTable"; // Adjust path
 import { getTravelPlans } from "@/services/traveler/travelPlan.service"; // Adjust path
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manage Trips | Admin Dashboard - GoPal",
+  description:
+    "Administrator view for managing travel plans. Monitor active trips, review itineraries, enforce community guidelines, and oversee all travel activities on GoPal.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 type SearchParams = {
   searchParams: {

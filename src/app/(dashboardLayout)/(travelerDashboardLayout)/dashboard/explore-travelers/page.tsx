@@ -1,9 +1,19 @@
 import TravelersGrid from "@/components/modules/Traveler/ExploreTraveler/TravelersGrid";
 import TravelLoader from "@/components/shared/TravelLoader";
 import { getRecommendedTravelers } from "@/services/traveler/traveler.service";
-
 import { Sparkles } from "lucide-react";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Traveler Matches | Connect with Like-Minded Explorers - GoPal",
+  description:
+    "Discover your tribe. Based on your travel style and interests, browse our curated list of recommended travel buddies and start planning your next shared adventure.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const ExploreTravelersPage = async () => {
   const { data: travelers } = await getRecommendedTravelers();

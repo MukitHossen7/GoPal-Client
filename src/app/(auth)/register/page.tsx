@@ -3,8 +3,18 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Register - GoPal",
-  description: "Join the best community of travelers.",
+  title: "Join GoPal | Create Your Travel Profile & Find Buddies",
+  description:
+    "Create your free GoPal account today. Build your traveler profile, find compatible travel buddies, and start planning your next shared adventure around the world.",
+  keywords: [
+    "GoPal Registration",
+    "Sign Up",
+    "Join GoPal",
+    "Create Account",
+    "Travel Community",
+    "Find Travel Partner",
+    "Traveler Profile",
+  ],
 };
 
 export default function RegisterPage() {
