@@ -53,7 +53,7 @@ const TravelerDashboardPage = async () => {
                   View all
                 </Link>
               </div>
-              <UpcomingTripCard trip={data.upcomingTrip} />
+              <UpcomingTripCard trip={data?.upcomingTrip} />
             </div>
           </BlurFade>
 
