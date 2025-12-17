@@ -10,6 +10,16 @@ A modern, responsive, and interactive frontend application for **Travel Buddy & 
 https://go-pal.vercel.app/
 ```
 
+## Project Credentials
+
+```
+Admin Email: admin@gmail.com
+Admin Password: Admin123@
+
+Traveler Email: developermukit@gmail.com
+Traveler Password: User123@
+```
+
 ## Features
 
 ### General Features
