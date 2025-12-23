@@ -35,7 +35,7 @@ const MembershipPage = () => {
         <PricingSwitch />
       </div>
 
-      <div className="mt-32">
+      <div className="mt-20">
         <FAQSection />
       </div>
     </main>

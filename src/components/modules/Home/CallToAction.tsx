@@ -12,7 +12,7 @@ const CallToAction = () => {
       {/* Background Section with Optimized Next.js Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://i.ibb.co/QjxQbhF0/01-JGNTGFEYV0-ERRA4-XZQXH7-MAE.webp"
+          src="https://i.ibb.co/mYfjr1J/AT.webp"
           alt="Travel Adventure"
           fill
           priority
