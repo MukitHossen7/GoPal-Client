@@ -4,7 +4,16 @@ import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { toast } from "sonner";
-import { Loader2, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import {
+  Loader2,
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  ArrowRight,
+  ShieldCheck,
+  UserCheck,
+} from "lucide-react";
 
 // UI Components
 import { Button } from "@/components/ui/button";
@@ -27,7 +36,10 @@ import { Logo } from "@/components/shared/Logo";
 const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
   // Server Action Hook
   const [state, formAction, isPending] = useActionState(loginUser, null);
-  // Local State for UI
+
+  // Local State for Form Management (to enable auto-fill)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   // Error Toast Handling
@@ -36,6 +48,12 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
       toast.error("Login failed. Please check your credentials.");
     }
   }, [state]);
+
+  // Handle Demo Login Click
+  const handleDemoLogin = (demoEmail: string, demoPass: string) => {
+    setEmail(demoEmail);
+    setPassword(demoPass);
+  };
 
   // Animation Variants
   const containerVariants: Variants = {
@@ -52,26 +70,67 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="w-full max-w-md mx-auto"
+      className="w-full max-w-lg mx-auto"
     >
-      <Card className="border shadow-none bg-white/90 backdrop-blur-sm dark:bg-card/90 overflow-hidden">
-        {/* Decorative Top Line */}
-        <div className="h-2 w-full bg-gradient-to-r from-primary via-blue-400 to-primary" />
+      <Card className="border-none border-border/50 shadow-none bg-card/50 backdrop-blur-xl overflow-hidden rounded-lg ">
+        {/* Top Accent Gradient Line */}
+        <div className="h-1.5 w-full bg-gradient-to-r from-primary via-primary/60 to-primary" />
 
-        <CardHeader className="space-y-1 text-center  items-center">
+        <CardHeader className="space-y-2 text-center items-center ">
           <Link href="/">
-            <Logo variant="icon" className="mb-2 mx-auto" />
+            <Logo
+              variant="icon"
+              className="mb-2 mx-auto scale-110 hover:scale-125 transition-transform"
+            />
           </Link>
-          <CardTitle className="text-2xl font-bold text-foreground">
+          <CardTitle className="text-2xl font-bold tracking-tight text-foreground">
             Welcome Back
           </CardTitle>
-          <CardDescription>
-            Enter your credentials to continue your adventure
+          <CardDescription className="text-muted-foreground font-medium">
+            Enter your credentials to start your journey
           </CardDescription>
         </CardHeader>
 
-        <CardContent>
-          <form action={formAction} className="space-y-4">
+        <CardContent className="py-6">
+          {/* --- Demo Login Section --- */}
+          <div className="mb-8 space-y-3">
+            <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-muted-foreground/60 text-center">
+              Quick Demo Access
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => handleDemoLogin("admin@gmail.com", "Admin123@")}
+                className="flex items-center justify-center gap-2 py-2.5 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all group"
+              >
+                <ShieldCheck size={16} className="text-primary" />
+                <span className="text-[11px] font-bold text-foreground">
+                  Admin Login
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  handleDemoLogin("developermukit@gmail.com", "User123@")
+                }
+                className="flex items-center justify-center gap-2 py-2.5 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-all group"
+              >
+                <UserCheck size={16} className="text-primary" />
+                <span className="text-[11px] font-bold text-foreground">
+                  Traveler Login
+                </span>
+              </button>
+            </div>
+            <div className="flex items-center gap-4 py-2">
+              <div className="h-px w-full bg-border/50"></div>
+              <span className="text-[10px] text-muted-foreground font-medium uppercase">
+                Or
+              </span>
+              <div className="h-px w-full bg-border/50"></div>
+            </div>
+          </div>
+
+          <form action={formAction} className="space-y-6">
             {/* Hidden Redirect Field */}
             {redirect && (
               <input type="hidden" name="redirect" value={redirect} />
@@ -83,20 +142,21 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
                 Email Address
               </Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Mail className="absolute left-3 top-3 h-4.5 w-4.5 text-muted-foreground" />
                 <Input
                   id="email"
                   name="email"
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="traveler@gopal.com"
-                  className="pl-9 bg-background/50 border-input focus:border-primary transition-all duration-300"
-                  // required
+                  className="pl-10 h-10 rounded-lg bg-background border-border/60 focus:ring focus:ring-primary/20 transition-all"
                 />
               </div>
               {getInputFieldError("email", state) && (
                 <motion.span
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   className="text-destructive font-medium text-xs block"
                 >
                   {getInputFieldError("email", state)}
@@ -107,40 +167,43 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
             {/* Password Field */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="text-sm font-medium">
+                  Password
+                </Label>
                 <Link
                   href="#"
-                  className="text-xs text-primary hover:underline font-medium"
+                  className="text-[11px] text-primary hover:underline font-bold"
                 >
                   Forgot password?
                 </Link>
               </div>
               <div className="relative">
-                <Lock className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Lock className="absolute left-3 top-3 h-4.5 w-4.5 text-muted-foreground" />
                 <Input
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="pl-9 pr-9 bg-background/50 border-input focus:border-primary transition-all duration-300"
-                  // required
+                  className="pl-10 pr-10 h-10 rounded-lg bg-background border-border/60 focus:ring focus:ring-primary/20 transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2.5 text-muted-foreground hover:text-primary transition-colors"
+                  className="absolute right-3 top-3 text-muted-foreground hover:text-primary transition-colors"
                 >
                   {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
+                    <EyeOff className="h-4.5 w-4.5" />
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4.5 w-4.5" />
                   )}
                 </button>
               </div>
               {getInputFieldError("password", state) && (
                 <motion.span
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   className="text-destructive font-medium text-xs block"
                 >
                   {getInputFieldError("password", state)}
@@ -151,35 +214,40 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full font-semibold shadow-md hover:shadow-lg transition-all"
+              className="w-full h-12 rounded-xl font-bold text-base shadow-none shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-[0.98]"
               disabled={isPending}
             >
               {isPending ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Logging in...
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Authenticating...
                 </>
               ) : (
                 <>
-                  Login <ArrowRight className="ml-2 h-4 w-4" />
+                  Log In to GoPal <ArrowRight className="ml-2 h-5 w-5" />
                 </>
               )}
             </Button>
           </form>
         </CardContent>
 
-        <CardFooter className="flex flex-col space-y-2 text-center bg-muted/30 p-6">
+        <CardFooter className="flex flex-col space-y-4 text-center bg-muted/20 px-8 border-t border-border/50">
           <div className="text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
               href="/register"
-              className="text-primary font-semibold hover:underline"
+              className="text-primary font-medium hover:underline tracking-tight"
             >
-              Sign up for free
+              Create Free Account
             </Link>
           </div>
         </CardFooter>
       </Card>
+
+      {/* Visual Support Info */}
+      <p className="mt-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-50">
+        Secure SSL Encrypted • Traveler Safety First
+      </p>
     </motion.div>
   );
 };

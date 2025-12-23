@@ -61,7 +61,7 @@ export default async function LoginPage({
         <div className="absolute bottom-0 left-0 -z-10 w-[40%] h-[40%] bg-teal-100/40 rounded-full blur-3xl opacity-50 dark:bg-teal-900/20" />
 
         {/* The Login Form Component */}
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-lg">
           <LoginFormComponent redirect={params.redirect} />
         </div>
       </div>

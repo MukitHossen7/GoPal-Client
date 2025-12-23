@@ -150,10 +150,17 @@ const PublicNavbar = ({
               // Logged Out State
               <div className="flex gap-2">
                 <Link href="/login">
-                  <Button variant="ghost">Log in</Button>
+                  <Button
+                    variant="outline"
+                    className="rounded-full px-6 cursor-pointer"
+                  >
+                    Log in
+                  </Button>
                 </Link>
                 <Link href="/register">
-                  <Button>Sign Up</Button>
+                  <Button className="rounded-full px-6 cursor-pointer">
+                    Sign Up
+                  </Button>
                 </Link>
               </div>
             )}
@@ -230,12 +237,17 @@ const PublicNavbar = ({
               ) : (
                 <div className="flex flex-col gap-3">
                   <Link href="/login" onClick={() => setMenuOpen(false)}>
-                    <Button variant="outline" className="w-full">
+                    <Button
+                      variant="outline"
+                      className="rounded-full px-6 cursor-pointer w-full"
+                    >
                       Log in
                     </Button>
                   </Link>
                   <Link href="/register" onClick={() => setMenuOpen(false)}>
-                    <Button className="w-full">Sign Up</Button>
+                    <Button className="rounded-full px-6 cursor-pointer w-full">
+                      Sign Up
+                    </Button>
                   </Link>
                 </div>
               )}
