@@ -10,7 +10,6 @@ import Pagination from "@/components/shared/Pagination";
 import { TravelCard } from "@/components/modules/TravelPlan/TravelCard.tsx";
 import SelectFilter from "@/components/shared/SelectFilter";
 import { Metadata } from "next";
-// import { TravelCard } from "@/components/modules/TravelPlan/TravelCard.tsx";
 
 export const metadata: Metadata = {
   title: "Find Travel Buddy & Join Trips | Explore Plans - GoPal",
@@ -108,7 +107,7 @@ export default async function TravelPlansPage(props: Props) {
 
         {/* Content Grid */}
         {plans && plans.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {plans?.map((plan: ITravelPlan, index: number) => (
               <BlurFade key={plan.id} delay={0.2 + index * 0.05} inView>
                 <TravelCard plan={plan} index={index} />

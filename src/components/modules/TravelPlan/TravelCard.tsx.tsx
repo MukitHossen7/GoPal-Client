@@ -8,7 +8,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CalendarDays, MapPin, DollarSign } from "lucide-react";
+import { CalendarDays, MapPin } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -36,7 +36,7 @@ export function TravelCard({ plan, index }: TravelCardProps) {
       className="h-full"
     >
       <Link href={`/travel-plans/${plan.id}`}>
-        <Card className="group h-full w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-black transition-colors hover:border-gray-300 dark:hover:border-gray-700 shadow-none">
+        <Card className="group h-full w-full overflow-hidden rounded-lg border-none border-gray-200 bg-white dark:border-gray-800 dark:bg-black transition-colors hover:border-gray-300 dark:hover:border-gray-700 shadow-none py-0">
           {/* Image Container */}
           <div className="relative h-48 w-full overflow-hidden">
             <Image
@@ -52,23 +52,23 @@ export function TravelCard({ plan, index }: TravelCardProps) {
             </Badge>
           </div>
 
-          <CardHeader className="p-4 pb-2">
+          <CardHeader className="px-4">
             <div className="flex items-center text-xs text-muted-foreground mb-2">
               <MapPin className="w-3 h-3 mr-1 text-primary" />
               {plan?.destination}
             </div>
-            <h3 className="font-bold text-lg leading-tight group-hover:text-primary transition-colors line-clamp-1">
+            <h3 className="font-medium text-lg leading-tight group-hover:text-primary transition-colors line-clamp-1">
               {plan?.title}
             </h3>
           </CardHeader>
 
-          <CardContent className="p-4 pt-2 flex-grow">
+          <CardContent className="px-4  flex-grow">
             <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
               {plan?.description?.slice(0, 100)}...
             </p>
 
             <div className="flex items-center gap-4 text-sm font-medium text-zinc-600 dark:text-zinc-300">
-              <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded-md">
+              <div className="flex items-center gap-1.5  py-1 rounded-md">
                 <CalendarDays className="w-4 h-4 text-primary" />
                 <span>
                   {format(new Date(plan?.startDate), "MMM d")} -{" "}
@@ -89,8 +89,7 @@ export function TravelCard({ plan, index }: TravelCardProps) {
                 {plan.traveler?.name || "Unknown"}
               </span>
             </div>
-            <div className="flex items-center text-primary font-bold text-sm">
-              <DollarSign className="w-3 h-3 mr-0.5" />
+            <div className="flex items-center text-primary font-medium text-sm">
               {plan?.budgetRange}
             </div>
           </CardFooter>
