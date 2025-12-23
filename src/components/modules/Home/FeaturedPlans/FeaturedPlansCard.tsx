@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Calendar, MapPin } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Calendar, MapPin, Star, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -15,81 +15,94 @@ const TravelPlanCard = ({ plan }: { plan: any }) => {
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      transition={{ type: "spring", stiffness: 300 }}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="h-full"
     >
-      <Link href={`/travel-plans/${plan.id}`}>
-        <Card className="group relative overflow-hidden rounded-xl border-none shadow-none h-[420px] flex flex-col">
-          {/* Image Section with Overlay */}
-          <div className="relative h-56 w-full overflow-hidden">
+      <Link href={`/travel-plans/${plan.id}`} className="block h-full group">
+        <Card className="relative h-full flex flex-col overflow-hidden border-none py-0 shadow-none bg-transparent">
+          {/* Image Section */}
+          <div className="relative h-[240px] w-full overflow-hidden rounded-xl">
             <Image
               src={bgImage}
               alt={plan.destination}
               fill
+              sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover transition-transform duration-700 group-hover:scale-110"
+              priority={false}
             />
-            {/* Gradient Overlay for Text Readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-            {/* Top Badges */}
-            <div className="absolute top-3 left-3 flex gap-2">
-              <Badge className="bg-primary/90 hover:bg-primary backdrop-blur-sm shadow-sm">
-                {plan.travelType}
-              </Badge>
-            </div>
-
-            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full text-xs font-bold text-black flex items-center gap-1 shadow-sm">
-              ★ {plan?.traveler?.averageRating.toFixed(1)}
-            </div>
-
-            {/* Destination & Title on Image */}
-            <div className="absolute bottom-3 left-3 right-3 text-white">
-              <div className="flex items-center gap-1 text-xs text-gray-200 mb-1">
-                <MapPin size={12} /> {plan.destination}
-              </div>
-              <h3 className="font-bold text-lg leading-tight line-clamp-2">
-                {plan.title}
-              </h3>
+            {/* Top Rating Badge */}
+            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+              <Star size={14} className="fill-orange-400 text-orange-400" />
+              <span className="text-[12px] font-bold text-gray-800">
+                {plan?.traveler?.averageRating?.toFixed(1) || "5.0"}
+              </span>
             </div>
           </div>
 
           {/* Content Section */}
-          <CardContent className="flex-1 p-4 pt-4 space-y-3 bg-card">
-            <div className="flex justify-between items-center text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Calendar size={14} className="text-primary" />
-                {new Date(plan.startDate).toLocaleDateString()}
-              </div>
-              <div className="font-medium text-foreground">
-                {plan.budgetRange}
-              </div>
+          <div className="flex flex-col flex-1 ">
+            {/* Title */}
+            <h3 className="text-[20px] font-medium text-foreground leading-tight mb-3 line-clamp-2 transition-colors group-hover:text-primary">
+              {plan.title}
+            </h3>
+
+            {/* Travel Path Style (Screenshot inspired) */}
+            <div className="flex items-center flex-wrap gap-2 text-[13px] text-muted-foreground mb-4">
+              <span className="flex items-center gap-1">
+                <MapPin size={12} className="text-primary" /> {plan.destination}
+              </span>
+              <span className="text-gray-300">→</span>
+              <span className="flex items-center gap-1">
+                <Calendar size={12} />{" "}
+                {new Date(plan.startDate).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+              <span className="text-gray-300">→</span>
+              <span className="flex items-center gap-1 font-medium text-foreground/80 italic">
+                {plan.travelType}
+              </span>
             </div>
 
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {plan.description}
-            </p>
-          </CardContent>
+            {/* Divider */}
+            <div className="w-full h-[1px] bg-border mb-4" />
 
-          {/* Footer: Traveler Info & CTA */}
-          <CardFooter className="p-4 pt-0 flex items-center justify-between border-t bg-card/50 mt-auto">
-            <div className="flex items-center gap-2 mt-3">
-              <div className="relative h-8 w-8 rounded-full overflow-hidden border border-gray-300">
-                <Image
-                  src={plan.traveler.profileImage || "/placeholder-user.jpg"}
-                  alt={plan.traveler.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+            {/* Bottom Meta Section */}
+            <div className="mt-auto flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="text-xs text-muted-foreground">Hosted by</span>
-                <span className="text-sm font-semibold leading-none">
-                  {plan.traveler.name.split(" ")[0]}
+                <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-bold">
+                  Estimated Budget
+                </span>
+                <span className="text-base font-bold text-foreground">
+                  {plan.budgetRange}
                 </span>
               </div>
+
+              {/* Host Info Badge */}
+              <div className="flex items-center gap-2 bg-muted/50 px-3 py-1 rounded-full border border-border group-hover:bg-primary/10 group-hover:border-primary/30 transition-all duration-300">
+                <div className="relative h-6 w-6 rounded-full overflow-hidden">
+                  <Image
+                    src={
+                      plan.traveler.profileImage ||
+                      "https://avatar.vercel.sh/user"
+                    }
+                    alt={plan.traveler.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-[12px] font-bold text-foreground truncate max-w-[80px]">
+                  {plan.traveler.name.split(" ")[0]}
+                </span>
+                <ArrowRight
+                  size={14}
+                  className="text-primary transition-transform group-hover:translate-x-1"
+                />
+              </div>
             </div>
-          </CardFooter>
+          </div>
         </Card>
       </Link>
     </motion.div>
