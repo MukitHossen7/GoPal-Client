@@ -3,7 +3,7 @@ import TravelPlanCard from "@/components/modules/MyPlans/TravelPlanCard";
 import Pagination from "@/components/shared/Pagination";
 import { getMyTravelPlans } from "@/services/traveler/travelPlan.service";
 import { IMeta, ITravelPlan } from "@/types/travelPlan.interface";
-import { Plane, SearchX } from "lucide-react";
+import { SearchX } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -40,13 +40,13 @@ export default async function MyPlansPage(props: Props) {
     await getMyTravelPlans(queryString);
 
   return (
-    <div className="container mx-auto p-4 md:p-8 min-h-screen space-y-8">
+    <div className="container mx-auto px-4 pt-10 pb-20 min-h-screen space-y-8">
       {/* Header Section */}
       <BlurFade delay={0.1} inView>
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
           <div>
-            <h1 className="text-3xl md:text-4xl tracking-tight font-bold text-gray-900 flex items-center gap-3">
-              <Plane className="w-8 h-8 text-primary" /> My Travel Plans
+            <h1 className="text-3xl md:text-4xl tracking-tight font-bold text-gray-900">
+              My Travel Plans
             </h1>
             <p className="text-gray-500 mt-2">
               Manage your upcoming adventures and past memories.
@@ -57,7 +57,7 @@ export default async function MyPlansPage(props: Props) {
 
       {/* Content Grid */}
       {data && data.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {data.map((plan, idx) => (
             <BlurFade key={plan.id} delay={0.2 + idx * 0.05} inView>
               <TravelPlanCard plan={plan} />

@@ -24,7 +24,7 @@ export default function TravelPlanCard({ plan }: TravelPlanCardProps) {
 
   return (
     <Link href={`/travel-plans/${plan.id}`}>
-      <Card className="group h-full w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-black transition-colors hover:border-gray-300 dark:hover:border-gray-700 shadow-none">
+      <Card className="group h-full w-full overflow-hidden rounded-xl border-none border-gray-200 bg-white dark:border-gray-800 dark:bg-black transition-colors hover:border-gray-300 dark:hover:border-gray-700 shadow-none py-0">
         {/* Image Section */}
         <div className="relative h-48 w-full overflow-hidden">
           <Image
@@ -60,11 +60,11 @@ export default function TravelPlanCard({ plan }: TravelPlanCardProps) {
         </div>
 
         {/* Content Section */}
-        <CardHeader className="pb-2">
+        <CardHeader className="px-2">
           <div className="flex justify-between items-start">
             <div>
               <CardTitle
-                className="text-xl font-bold line-clamp-1"
+                className="text-lg font-medium line-clamp-1"
                 title={plan?.title}
               >
                 {plan?.title}
@@ -77,20 +77,20 @@ export default function TravelPlanCard({ plan }: TravelPlanCardProps) {
           </div>
         </CardHeader>
 
-        <CardContent className="flex-grow">
+        <CardContent className="flex-grow px-2 pb-2">
           <CardDescription className="line-clamp-2 mb-4 text-gray-600">
             {plan?.description.slice(0, 100)}...
           </CardDescription>
 
           <div className="space-y-2 text-sm">
-            <div className="flex items-center gap-2 text-gray-700 bg-gray-50 p-2 rounded-lg">
+            <div className="flex items-center gap-2 text-gray-700">
               <Calendar className="w-4 h-4 text-blue-500" />
               <span className="font-medium">
                 {format(new Date(plan.startDate), "MMM dd")} -{" "}
                 {format(new Date(plan.endDate), "MMM dd, yyyy")}
               </span>
             </div>
-            <div className="flex items-center gap-2 text-gray-700 bg-gray-50 p-2 rounded-lg">
+            <div className="flex items-center gap-2 text-gray-700 ">
               <Wallet className="w-4 h-4 text-green-600" />
               <span className="font-medium">{plan.budgetRange}</span>
             </div>
