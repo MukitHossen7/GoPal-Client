@@ -6,7 +6,7 @@ import HeroSection from "@/components/modules/Home/HeroSection";
 import HowItWorks from "@/components/modules/Home/HowItWorks";
 import PopularDestinations from "@/components/modules/Home/PopularDestinations";
 import StatsSection from "@/components/modules/Home/StatsSection";
-import Testimonials from "@/components/modules/Home/Testimonials";
+import Testimonials from "@/components/modules/Home/Testimonials/Testimonials";
 import WhyChooseUs from "@/components/modules/Home/WhyChooseUs";
 import { getUserInfo } from "@/services/auth/getUserInfo";
 import { Metadata } from "next";
