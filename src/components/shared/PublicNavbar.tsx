@@ -30,7 +30,6 @@ const PublicNavbar = ({
     { name: "Travel Buddy", path: "/travel-plans" },
     { name: "Memberships", path: "/membership" },
     { name: "Contact", path: "/contact" },
-    { name: "Support", path: "/support" },
   ];
 
   const isActive = (path: string) => pathname === path;

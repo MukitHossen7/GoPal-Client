@@ -25,7 +25,7 @@ const ContactPage = () => {
   return (
     <div className="bg-background min-h-screen overflow-x-hidden">
       <ContactHero />
-      <div className="container mx-auto px-4 py-20">
+      <div className="container mx-auto px-4 pb-20">
         <SupportCards />
         <ContactFormAndLocation />
         <SafetyHub />
