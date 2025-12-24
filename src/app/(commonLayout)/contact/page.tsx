@@ -1,8 +1,10 @@
+import ContactHero from "@/components/modules/Contact/ContactHero";
+
 const ContactPage = () => {
   return (
-    <div>
-      <h1>ContactPage</h1>
-    </div>
+    <main className="min-h-screen bg-background">
+      <ContactHero />
+    </main>
   );
 };
 
