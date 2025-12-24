@@ -72,17 +72,15 @@ const LoginFormComponent = ({ redirect }: { redirect?: string }) => {
       variants={containerVariants}
       className="w-full max-w-lg mx-auto"
     >
-      <Card className="border-none border-border/50 shadow-none bg-card/50 backdrop-blur-xl overflow-hidden rounded-lg ">
+      <Card className="border-none border-border/50 shadow-none bg-card/50 backdrop-blur-xl overflow-hidden rounded-lg">
         {/* Top Accent Gradient Line */}
         <div className="h-1.5 w-full bg-gradient-to-r from-primary via-primary/60 to-primary" />
-
-        <CardHeader className="space-y-2 text-center items-center ">
-          <Link href="/">
-            <Logo
-              variant="icon"
-              className="mb-2 mx-auto scale-110 hover:scale-125 transition-transform"
-            />
+        <div className="flex justify-center -mb-2">
+          <Link href="/" className="block">
+            <Logo variant="full" />
           </Link>
+        </div>
+        <CardHeader className="flex flex-col items-center text-center">
           <CardTitle className="text-2xl font-bold tracking-tight text-foreground">
             Welcome Back
           </CardTitle>

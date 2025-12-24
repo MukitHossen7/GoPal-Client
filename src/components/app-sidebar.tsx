@@ -8,9 +8,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { IUserInfo } from "@/types/user.interface";
 import {
@@ -116,20 +113,11 @@ export function AppSidebar({ authData, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5 hover:bg-transparent"
-            >
-              <Link href="/">
-                <Logo variant="full" />
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <Link href="/" className="transition-opacity hover:opacity-90">
+          <Logo variant="full" />
+        </Link>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="mt-3">
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
