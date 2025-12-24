@@ -25,9 +25,12 @@ const PublicNavbar = ({
   };
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
     { name: "Travelers", path: "/explore-travelers" },
     { name: "Travel Buddy", path: "/travel-plans" },
     { name: "Memberships", path: "/membership" },
+    { name: "Contact", path: "/contact" },
+    { name: "Support", path: "/support" },
   ];
 
   const isActive = (path: string) => pathname === path;
