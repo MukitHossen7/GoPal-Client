@@ -1,4 +1,5 @@
 import AboutHero from "@/components/modules/About/AboutHero";
+import MeetExperts from "@/components/modules/About/MeetExperts";
 import MissionVision from "@/components/modules/About/MissionVision";
 import OurStory from "@/components/modules/About/OurStory";
 
@@ -8,6 +9,7 @@ export default function AboutPage() {
       <AboutHero />
       <OurStory />
       <MissionVision />
+      <MeetExperts />
     </main>
   );
 }
