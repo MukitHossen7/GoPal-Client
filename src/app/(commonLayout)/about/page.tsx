@@ -1,3 +1,4 @@
+import AboutCTA from "@/components/modules/About/AboutCTA";
 import AboutHero from "@/components/modules/About/AboutHero";
 import MeetExperts from "@/components/modules/About/MeetExperts";
 import MissionVision from "@/components/modules/About/MissionVision";
@@ -12,6 +13,7 @@ export default function AboutPage() {
       <MissionVision />
       <MeetExperts />
       <TrustPartners />
+      <AboutCTA />
     </main>
   );
 }
