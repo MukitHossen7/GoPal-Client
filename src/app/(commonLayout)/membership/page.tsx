@@ -4,8 +4,20 @@ import { BadgeCheck } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Membership Plans | GoPal Premium",
-  description: "Upgrade your journey with GoPal Premium features.",
+  title: "Membership Plans | Unlock Premium Travel Features - GoPal",
+  description:
+    "Upgrade to GoPal Premium for an enhanced travel experience. Get a verified badge, unlimited trip buddy requests, priority matching, and exclusive access to global travel meetups.",
+  keywords: [
+    "GoPal Membership",
+    "Premium Travel Features",
+    "Verified Travel Buddy",
+    "Subscription Plans",
+    "Unlimited Trip Requests",
+    "Travel Community Premium",
+    "Secure Travel Matching",
+    "GoPal Verified Badge",
+    "Premium Traveler Benefits",
+  ],
 };
 
 const MembershipPage = () => {
