@@ -2,6 +2,7 @@ import AboutHero from "@/components/modules/About/AboutHero";
 import MeetExperts from "@/components/modules/About/MeetExperts";
 import MissionVision from "@/components/modules/About/MissionVision";
 import OurStory from "@/components/modules/About/OurStory";
+import TrustPartners from "@/components/modules/About/TrustPartners";
 
 export default function AboutPage() {
   return (
@@ -10,6 +11,7 @@ export default function AboutPage() {
       <OurStory />
       <MissionVision />
       <MeetExperts />
+      <TrustPartners />
     </main>
   );
 }
