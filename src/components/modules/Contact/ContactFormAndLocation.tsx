@@ -18,7 +18,7 @@ const ContactFormAndLocation = () => {
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        className="lg:col-span-7 bg-card border border-border p-8 md:p-12 rounded-[2.5rem] shadow-none"
+        className="lg:col-span-7 bg-card border-none border-border p-8 md:p-12 rounded-[2.5rem] shadow-sm"
       >
         <h2 className="text-3xl font-bold mb-8 tracking-tight">
           Send a Message
@@ -92,10 +92,10 @@ const ContactFormAndLocation = () => {
         viewport={{ once: true }}
         className="lg:col-span-5 space-y-8"
       >
-        <div className="bg-primary/5 border border-primary/10 p-8 rounded-[2.5rem] space-y-6 shadow-none">
+        <div className="bg-primary/5 border-none border-primary/10 p-8 rounded-[2.5rem] space-y-6 shadow-none">
           <h3 className="text-2xl font-bold mb-4">Our Headquarters</h3>
           <div className="flex gap-4">
-            <div className="w-12 h-12 rounded-xl bg-background border border-border flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-background  border-border flex items-center justify-center flex-shrink-0">
               <MapPin className="text-primary" />
             </div>
             <div>
@@ -121,7 +121,7 @@ const ContactFormAndLocation = () => {
           </div>
         </div>
 
-        <div className="bg-card shadow-none border border-border p-8 rounded-[2.5rem]">
+        <div className="bg-card shadow-sm border-none border-border p-8 rounded-[2.5rem]">
           <h3 className="text-xl font-bold mb-6">Join Our Community</h3>
           <div className="flex gap-4">
             {[

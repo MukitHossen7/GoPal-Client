@@ -1,191 +1,15 @@
-// import Link from "next/link";
-
-// import {
-//   Facebook,
-//   Twitter,
-//   Instagram,
-//   Linkedin,
-//   Mail,
-//   Phone,
-//   MapPin,
-// } from "lucide-react";
-// import { Logo } from "./Logo";
-
-// const PublicFooter = () => {
-//   return (
-//     <footer className="border-t bg-background text-foreground">
-//       <div className="container mx-auto px-4 py-10">
-//         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-//           {/* Column 1: Brand Info */}
-//           <div className="space-y-4">
-//             <Logo variant="full" />
-//             <p className="text-sm text-muted-foreground leading-relaxed">
-//               Connect with travelers heading to the same destination. Share
-//               costs, experiences, and memories with GoPal.
-//             </p>
-//             <div className="flex space-x-4">
-//               <Link
-//                 href="#"
-//                 className="text-muted-foreground hover:text-primary transition-colors"
-//               >
-//                 <Facebook size={20} />
-//               </Link>
-//               <Link
-//                 href="#"
-//                 className="text-muted-foreground hover:text-primary transition-colors"
-//               >
-//                 <Instagram size={20} />
-//               </Link>
-//               <Link
-//                 href="#"
-//                 className="text-muted-foreground hover:text-primary transition-colors"
-//               >
-//                 <Twitter size={20} />
-//               </Link>
-//               <Link
-//                 href="#"
-//                 className="text-muted-foreground hover:text-primary transition-colors"
-//               >
-//                 <Linkedin size={20} />
-//               </Link>
-//             </div>
-//           </div>
-
-//           {/* Column 2: Quick Links */}
-//           <div>
-//             <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
-//               Discover
-//             </h3>
-//             <ul className="space-y-3 text-sm">
-//               <li>
-//                 <Link
-//                   href="/"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   Home
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="/explore-travelers"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   Explore Travelers
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="/membership"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   membership
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="/travel-plans"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   Travel Plans
-//                 </Link>
-//               </li>
-//             </ul>
-//           </div>
-
-//           {/* Column 3: Support */}
-//           <div>
-//             <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
-//               Support
-//             </h3>
-//             <ul className="space-y-3 text-sm">
-//               <li>
-//                 <Link
-//                   href="#"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   FAQ
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="#"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   Safety Tips
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="#"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   Terms of Service
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link
-//                   href="#"
-//                   className="text-muted-foreground hover:text-primary transition-colors"
-//                 >
-//                   Privacy Policy
-//                 </Link>
-//               </li>
-//             </ul>
-//           </div>
-
-//           {/* Column 4: Contact */}
-//           <div>
-//             <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
-//               Contact Us
-//             </h3>
-//             <ul className="space-y-3 text-sm">
-//               <li className="flex items-start gap-3 text-muted-foreground">
-//                 <MapPin size={18} className="mt-0.5 text-primary" />
-//                 <span>
-//                   Level-4, 34, Awal Centre, <br />
-//                   Banani, Dhaka - 1213
-//                 </span>
-//               </li>
-//               <li className="flex items-center gap-3 text-muted-foreground">
-//                 <Phone size={18} className="text-primary" />
-//                 <span>+880 1234 567 890</span>
-//               </li>
-//               <li className="flex items-center gap-3 text-muted-foreground">
-//                 <Mail size={18} className="text-primary" />
-//                 <span>support@gopal.com</span>
-//               </li>
-//             </ul>
-//           </div>
-//         </div>
-
-//         {/* Bottom Bar */}
-//         <div className="mt-12 border-t pt-8 text-center">
-//           <p className="text-sm text-muted-foreground">
-//             &copy; {new Date().getFullYear()} GoPal. All Rights Reserved. Built
-//             for Travelers.
-//           </p>
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// };
-
-// export default PublicFooter;
-
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Facebook,
-  Twitter,
-  Instagram,
   Linkedin,
   Mail,
   Phone,
   MapPin,
   ArrowRight,
-  Send,
+  Github,
 } from "lucide-react";
 import { Logo } from "./Logo";
 
@@ -199,49 +23,12 @@ const PublicFooter = () => {
   };
 
   return (
-    <footer className="relative border-t bg-background pt-16 pb-8 overflow-hidden">
+    <footer className="relative border-t bg-background  pb-8 overflow-hidden">
       {/* Decorative Background Element (Real Site Vibe) */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         {/* Top Section: Newsletter/CTA (Professional sites always have this) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 pb-16 border-b border-border/50 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            variants={fadeInUp}
-          >
-            <h2 className="text-3xl font-bold tracking-tight text-foreground">
-              Ready for your next{" "}
-              <span className="text-primary italic font-black">adventure?</span>
-            </h2>
-            <p className="mt-2 text-muted-foreground max-w-md">
-              Join 50,000+ travelers and get the best buddy matches directly in
-              your inbox.
-            </p>
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            variants={fadeInUp}
-            className="flex w-full max-w-md lg:ml-auto"
-          >
-            <div className="relative w-full group">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full bg-secondary/50 border border-border h-14 pl-5 pr-32 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-medium"
-              />
-              <button className="absolute right-2 top-2 bottom-2 px-6 bg-primary text-primary-foreground rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all active:scale-95">
-                Subscribe <Send size={14} />
-              </button>
-            </div>
-          </motion.div>
-        </div>
 
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
@@ -261,10 +48,12 @@ const PublicFooter = () => {
             </p>
             <div className="flex items-center space-x-3">
               {[
-                { icon: Facebook, href: "#" },
-                { icon: Instagram, href: "#" },
-                { icon: Twitter, href: "#" },
-                { icon: Linkedin, href: "#" },
+                {
+                  icon: Facebook,
+                  href: "https://www.facebook.com/mukit.hossen.487594",
+                },
+                { icon: Github, href: "https://github.com/MukitHossen7" },
+                { icon: Linkedin, href: "www.linkedin.com/in/mukithossen" },
               ].map((social, idx) => (
                 <Link
                   key={idx}
@@ -279,7 +68,7 @@ const PublicFooter = () => {
 
           {/* Column 2: Quick Links (Discover) */}
           <div className="lg:pl-8">
-            <h3 className="mb-6 text-xs font-black uppercase tracking-[0.2em] text-foreground/70">
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-foreground/70">
               Discover
             </h3>
             <ul className="space-y-4">
@@ -307,7 +96,7 @@ const PublicFooter = () => {
 
           {/* Column 3: Company & Support */}
           <div>
-            <h3 className="mb-6 text-xs font-black uppercase tracking-[0.2em] text-foreground/70">
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-foreground/70">
               Company
             </h3>
             <ul className="space-y-4">
@@ -336,7 +125,7 @@ const PublicFooter = () => {
 
           {/* Column 4: Contact Info */}
           <div className="space-y-6">
-            <h3 className="mb-6 text-xs font-black uppercase tracking-[0.2em] text-foreground/70">
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-foreground/70">
               Get in Touch
             </h3>
             <ul className="space-y-5">
