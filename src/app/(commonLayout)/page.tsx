@@ -7,6 +7,7 @@ import HowItWorks from "@/components/modules/Home/HowItWorks";
 import PopularDestinations from "@/components/modules/Home/PopularDestinations";
 import StatsSection from "@/components/modules/Home/StatsSection";
 import Testimonials from "@/components/modules/Home/Testimonials/Testimonials";
+import TravelCommunity from "@/components/modules/Home/TravelCommunity";
 import WhyChooseUs from "@/components/modules/Home/WhyChooseUs";
 import { getUserInfo } from "@/services/auth/getUserInfo";
 import { Metadata } from "next";
@@ -52,6 +53,8 @@ const HomePage = async () => {
 
       {/* 7. Testimonials: Social Proof */}
       <Testimonials />
+
+      <TravelCommunity />
 
       {/* 8. Final CTA: Final push to register */}
       <CallToAction />
